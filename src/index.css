@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Great+Vibes&family=Montserrat:wght@300;400;500;600;700&family=Playfair+Display:wght@400;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Great+Vibes&family=Montserrat:wght@300;400;600&display=swap');
 
 @import 'tailwindcss';
 @plugin '.././hero.ts';
@@ -6,53 +6,13 @@
 @custom-variant dark (&:is(.dark *));
 
 :root {
-	/* Primary Color Palette */
 	--color-romantic-red: #e11d48;
-	--color-rose-deep: #be123c;
-	--color-rose-bright: #fb7185;
 	--color-soft-pink: #fff1f2;
-	--color-pink-light: #fce7f3;
-	--color-pink-warm: #fecdd3;
-
-	/* Gradient Colors */
-	--gradient-romantic: linear-gradient(
-		135deg,
-		#fce7f3 0%,
-		#fff1f2 50%,
-		#ffe4e6 100%
-	);
-	--gradient-rose: linear-gradient(
-		135deg,
-		#fb7185 0%,
-		#e11d48 50%,
-		#be123c 100%
-	);
-	--gradient-warm: linear-gradient(
-		135deg,
-		#fef3c7 0%,
-		#fecdd3 50%,
-		#fce7f3 100%
-	);
-
-	/* Shadows */
-	--shadow-romantic: 0 10px 40px -10px rgba(225, 29, 72, 0.3);
-	--shadow-soft: 0 8px 32px rgba(251, 113, 133, 0.15);
-	--shadow-glow: 0 0 40px rgba(225, 29, 72, 0.2);
-
-	/* Glass Effect */
-	--glass-bg: rgba(255, 255, 255, 0.25);
-	--glass-border: rgba(255, 255, 255, 0.4);
-	--glass-blur: blur(12px);
-}
-
-/* Smooth Scroll */
-html {
-	scroll-behavior: smooth;
 }
 
 body {
 	font-family: 'Montserrat', sans-serif;
-	background: var(--gradient-romantic);
+	background-color: var(--color-soft-pink);
 	color: #4a4a4a;
 	overflow-x: hidden;
 }
@@ -62,141 +22,4 @@ h2,
 h3,
 .font-romantic {
 	font-family: 'Great Vibes', cursive;
-	letter-spacing: 0.02em;
-}
-
-/* Custom Animations */
-@keyframes float {
-	0%,
-	100% {
-		transform: translateY(0px);
-	}
-	50% {
-		transform: translateY(-20px);
-	}
-}
-
-@keyframes pulse-glow {
-	0%,
-	100% {
-		box-shadow: 0 0 20px rgba(225, 29, 72, 0.3);
-	}
-	50% {
-		box-shadow: 0 0 40px rgba(225, 29, 72, 0.6);
-	}
-}
-
-@keyframes shimmer {
-	0% {
-		background-position: -1000px 0;
-	}
-	100% {
-		background-position: 1000px 0;
-	}
-}
-
-@keyframes gradient-shift {
-	0%,
-	100% {
-		background-position: 0% 50%;
-	}
-	50% {
-		background-position: 100% 50%;
-	}
-}
-
-@keyframes heart-beat {
-	0%,
-	100% {
-		transform: scale(1);
-	}
-	25% {
-		transform: scale(1.1);
-	}
-	50% {
-		transform: scale(1);
-	}
-	75% {
-		transform: scale(1.05);
-	}
-}
-
-@keyframes sparkle {
-	0%,
-	100% {
-		opacity: 0;
-		transform: scale(0) rotate(0deg);
-	}
-	50% {
-		opacity: 1;
-		transform: scale(1) rotate(180deg);
-	}
-}
-
-@keyframes slide-up {
-	from {
-		opacity: 0;
-		transform: translateY(30px);
-	}
-	to {
-		opacity: 1;
-		transform: translateY(0);
-	}
-}
-
-/* Utility Classes */
-.glass-card {
-	background: var(--glass-bg);
-	backdrop-filter: var(--glass-blur);
-	-webkit-backdrop-filter: var(--glass-blur);
-	border: 1px solid var(--glass-border);
-	box-shadow: var(--shadow-soft);
-}
-
-.gradient-text {
-	background: var(--gradient-rose);
-	-webkit-background-clip: text;
-	-webkit-text-fill-color: transparent;
-	background-clip: text;
-}
-
-.text-glow {
-	text-shadow: 0 0 20px rgba(225, 29, 72, 0.3);
-}
-
-.animate-float {
-	animation: float 3s ease-in-out infinite;
-}
-
-.animate-pulse-glow {
-	animation: pulse-glow 2s ease-in-out infinite;
-}
-
-.animate-gradient {
-	background-size: 200% 200%;
-	animation: gradient-shift 6s ease infinite;
-}
-
-/* Selection Styling */
-::selection {
-	background-color: rgba(225, 29, 72, 0.3);
-	color: #be123c;
-}
-
-/* Scrollbar Styling */
-::-webkit-scrollbar {
-	width: 10px;
-}
-
-::-webkit-scrollbar-track {
-	background: #fff1f2;
-}
-
-::-webkit-scrollbar-thumb {
-	background: linear-gradient(180deg, #fb7185 0%, #e11d48 100%);
-	border-radius: 5px;
-}
-
-::-webkit-scrollbar-thumb:hover {
-	background: linear-gradient(180deg, #e11d48 0%, #be123c 100%);
 }

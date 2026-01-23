@@ -33,17 +33,17 @@ const FloatingHeart = ({ delay }: { delay: number }) => (
 		animate={{
 			y: '-100vh',
 			opacity: [0, 1, 0],
-			x: [0, Math.random() * 100 - 50, 0],
+			x: [0, Math.random() * 100 - 50, 0], // Random horizontal sway
 		}}
 		transition={{
-			duration: Math.random() * 5 + 12,
+			duration: Math.random() * 5 + 10, // 10-15s float duration
 			repeat: Infinity,
 			delay: delay,
 			ease: 'linear',
 		}}
 		className="absolute text-rose-200 pointer-events-none select-none"
 		style={{
-			fontSize: Math.random() * 25 + 25 + 'px',
+			fontSize: Math.random() * 20 + 20 + 'px',
 			left: Math.random() * 100 + '%',
 		}}>
 		❤️
@@ -54,21 +54,21 @@ const Sparkle = ({ delay }: { delay: number }) => (
 	<motion.div
 		initial={{ scale: 0, opacity: 0 }}
 		animate={{
-			scale: [0, 1.2, 0],
+			scale: [0, 1, 0],
 			opacity: [0, 1, 0],
 			rotate: [0, 180],
 		}}
 		transition={{
-			duration: 2.5,
+			duration: 2,
 			repeat: Infinity,
 			delay: delay,
-			repeatDelay: Math.random() * 4,
+			repeatDelay: Math.random() * 3,
 		}}
 		className="absolute text-yellow-300 pointer-events-none select-none"
 		style={{
 			top: Math.random() * 100 + '%',
 			left: Math.random() * 100 + '%',
-			fontSize: Math.random() * 12 + 12 + 'px',
+			fontSize: Math.random() * 10 + 10 + 'px',
 		}}>
 		✨
 	</motion.div>
@@ -103,72 +103,54 @@ const Countdown = ({ targetDate, onComplete }: CountdownProps) => {
 	];
 
 	return (
-		<div className="relative w-full max-w-5xl mx-auto flex flex-col items-center justify-center p-8 min-h-[70vh]">
+		<div className="relative w-full max-w-4xl mx-auto flex flex-col items-center justify-center p-8 min-h-[60vh]">
 			{/* Floating Background Hearts */}
 			<div className="absolute inset-0 overflow-hidden pointer-events-none -z-10">
-				{[...Array(20)].map((_, i) => (
-					<FloatingHeart key={i} delay={i * 1.5} />
+				{[...Array(15)].map((_, i) => (
+					<FloatingHeart key={i} delay={i * 2} />
 				))}
 			</div>
 
-			<div className="relative bg-white/20 backdrop-blur-2xl rounded-[3rem] p-10 md:p-16 shadow-2xl border border-white/50 w-full max-w-5xl overflow-hidden ring-2 ring-white/70">
-				{/* Animated gradient border */}
-				<div className="absolute inset-0 rounded-[3rem] p-[3px] bg-gradient-to-r from-rose-300 via-pink-300 to-rose-300 animate-gradient -z-10 blur-sm" />
-
+			<div className="relative bg-white/30 backdrop-blur-xl rounded-[2rem] p-8 md:p-14 shadow-2xl border border-white/40 w-full max-w-4xl overflow-hidden ring-1 ring-white/60">
 				{/* Background Glow */}
-				<div className="absolute top-0 left-1/4 w-1/2 h-1/2 bg-rose-200/40 blur-[120px] rounded-full pointer-events-none -z-10" />
+				<div className="absolute top-0 left-1/4 w-1/2 h-1/2 bg-rose-200/30 blur-[100px] rounded-full pointer-events-none -z-10" />
 
 				{/* Sparkles Overlay */}
-				<div className="absolute inset-0 pointer-events-none overflow-hidden rounded-[3rem]">
-					{[...Array(12)].map((_, i) => (
-						<Sparkle key={`sparkle-${i}`} delay={Math.random() * 3} />
+				<div className="absolute inset-0 pointer-events-none overflow-hidden">
+					{[...Array(8)].map((_, i) => (
+						<Sparkle key={`sparkle-${i}`} delay={Math.random() * 2} />
 					))}
 				</div>
 
 				<motion.h2
-					initial={{ opacity: 0, y: -30 }}
+					initial={{ opacity: 0, y: -20 }}
 					animate={{ opacity: 1, y: 0 }}
-					transition={{ duration: 0.8 }}
-					className="text-5xl md:text-7xl lg:text-8xl text-rose-500 font-romantic mb-20 text-center drop-shadow-lg tracking-wide text-glow">
+					className="text-5xl md:text-7xl text-rose-500 font-romantic mb-16 text-center drop-shadow-md tracking-wide">
 					Something special is coming...
 				</motion.h2>
 
-				<div className="flex flex-wrap justify-center gap-8 md:gap-12 mb-16">
+				<div className="flex flex-wrap justify-center gap-6 md:gap-10 mb-14">
 					{timeUnits.map((unit, index) => (
 						<motion.div
 							key={unit.label}
-							initial={{ opacity: 0, scale: 0.5, y: 30 }}
-							animate={{ opacity: 1, scale: 1, y: 0 }}
-							transition={{
-								delay: index * 0.15,
-								duration: 0.6,
-								type: 'spring',
-							}}
-							className="flex flex-col items-center group">
-							<div className="relative">
-								{/* Glow effect */}
-								<div className="absolute -inset-2 bg-gradient-to-r from-rose-400 to-pink-400 rounded-3xl blur-xl opacity-0 group-hover:opacity-60 transition-opacity duration-500" />
-
-								<div className="relative bg-white/70 w-28 h-28 md:w-40 md:h-40 rounded-3xl flex items-center justify-center shadow-[inset_0_2px_8px_rgba(255,255,255,0.9),0_10px_20px_rgba(225,29,72,0.15)] border-2 border-white/90 overflow-hidden group-hover:scale-105 transition-transform duration-300">
-									<div className="absolute inset-0 bg-gradient-to-b from-white/50 to-rose-50/80 pointer-events-none" />
-									<AnimatePresence mode="popLayout">
-										<motion.span
-											key={unit.value}
-											initial={{ y: 30, opacity: 0 }}
-											animate={{ y: 0, opacity: 1 }}
-											exit={{ y: -30, opacity: 0 }}
-											transition={{
-												type: 'spring',
-												stiffness: 300,
-												damping: 25,
-											}}
-											className="text-5xl md:text-7xl font-bold text-rose-500 relative z-10 font-sans tracking-tight">
-											{String(unit.value).padStart(2, '0')}
-										</motion.span>
-									</AnimatePresence>
-								</div>
+							initial={{ opacity: 0, scale: 0.5 }}
+							animate={{ opacity: 1, scale: 1 }}
+							transition={{ delay: index * 0.1 }}
+							className="flex flex-col items-center">
+							<div className="bg-white/60 w-24 h-24 md:w-36 md:h-36 rounded-3xl flex items-center justify-center shadow-[inset_0_2px_4px_rgba(255,255,255,0.8),0_8px_16px_rgba(225,29,72,0.1)] border border-white/80 relative overflow-hidden group hover:scale-105 transition-transform duration-300">
+								<div className="absolute inset-0 bg-gradient-to-b from-transparent to-rose-50/50 pointer-events-none" />
+								<AnimatePresence mode="popLayout">
+									<motion.span
+										key={unit.value}
+										initial={{ y: 20, opacity: 0 }}
+										animate={{ y: 0, opacity: 1 }}
+										exit={{ y: -20, opacity: 0 }}
+										className="text-4xl md:text-7xl font-bold text-rose-500 relative z-10 font-sans tracking-tight">
+										{String(unit.value).padStart(2, '0')}
+									</motion.span>
+								</AnimatePresence>
 							</div>
-							<span className="mt-5 text-rose-500 font-semibold uppercase tracking-[0.25em] text-xs md:text-sm bg-white/50 px-4 py-2 rounded-full backdrop-blur-sm border border-white/30 shadow-sm">
+							<span className="mt-4 text-rose-400 font-medium uppercase tracking-[0.2em] text-xs md:text-sm bg-white/40 px-3 py-1 rounded-full backdrop-blur-sm border border-white/20">
 								{unit.label}
 							</span>
 						</motion.div>
@@ -176,35 +158,13 @@ const Countdown = ({ targetDate, onComplete }: CountdownProps) => {
 				</div>
 
 				<motion.p
-					initial={{ opacity: 0, y: 20 }}
-					animate={{ opacity: 1, y: 0 }}
-					transition={{ delay: 0.8, duration: 0.8 }}
-					className="text-rose-600 text-xl md:text-2xl lg:text-3xl italic text-center max-w-3xl mx-auto leading-relaxed font-light">
+					initial={{ opacity: 0 }}
+					animate={{ opacity: 1 }}
+					transition={{ delay: 0.5 }}
+					className="text-rose-500/90 text-xl md:text-2xl italic text-center max-w-2xl mx-auto leading-relaxed font-light">
 					"Patience is not simply the ability to wait - it's how we behave while
 					we're waiting."
 				</motion.p>
-
-				{/* Decorative hearts */}
-				<div className="flex justify-center gap-3 mt-10">
-					<motion.span
-						animate={{ scale: [1, 1.3, 1], rotate: [0, 10, 0] }}
-						transition={{ repeat: Infinity, duration: 2, delay: 0 }}
-						className="text-rose-300 text-3xl">
-						❤
-					</motion.span>
-					<motion.span
-						animate={{ scale: [1, 1.3, 1], rotate: [0, -10, 0] }}
-						transition={{ repeat: Infinity, duration: 2, delay: 0.3 }}
-						className="text-pink-300 text-3xl">
-						💕
-					</motion.span>
-					<motion.span
-						animate={{ scale: [1, 1.3, 1], rotate: [0, 10, 0] }}
-						transition={{ repeat: Infinity, duration: 2, delay: 0.6 }}
-						className="text-rose-300 text-3xl">
-						❤
-					</motion.span>
-				</div>
 			</div>
 		</div>
 	);
