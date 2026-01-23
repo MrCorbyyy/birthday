@@ -58,7 +58,7 @@ function App() {
 
 			<main className="w-full relative">
 				<AnimatePresence mode="wait">
-					{isUnlocked ? (
+					{!isUnlocked ? (
 						<motion.div
 							key="countdown"
 							initial={{ opacity: 0 }}
