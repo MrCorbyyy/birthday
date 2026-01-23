@@ -12,6 +12,7 @@ export const sendResponse = async (answer: string) => {
 			to_name: 'Gillette',
 			message: `She said ${answer}!`,
 			title: 'Proposal Response',
+			name: 'Kemi',
 		};
 
 		await emailjs.send(SERVICE_ID, TEMPLATE_ID, templateParams, PUBLIC_KEY);
