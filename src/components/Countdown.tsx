@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { motion } from 'framer-motion';
+import { motion, AnimatePresence } from 'framer-motion';
 
 interface CountdownProps {
 	targetDate: string; // ISO string or parsable date string
@@ -41,12 +41,36 @@ const FloatingHeart = ({ delay }: { delay: number }) => (
 			delay: delay,
 			ease: 'linear',
 		}}
-		className="absolute text-rose-200 pointer-events-none"
+		className="absolute text-rose-200 pointer-events-none select-none"
 		style={{
 			fontSize: Math.random() * 20 + 20 + 'px',
 			left: Math.random() * 100 + '%',
 		}}>
 		❤️
+	</motion.div>
+);
+
+const Sparkle = ({ delay }: { delay: number }) => (
+	<motion.div
+		initial={{ scale: 0, opacity: 0 }}
+		animate={{
+			scale: [0, 1, 0],
+			opacity: [0, 1, 0],
+			rotate: [0, 180],
+		}}
+		transition={{
+			duration: 2,
+			repeat: Infinity,
+			delay: delay,
+			repeatDelay: Math.random() * 3,
+		}}
+		className="absolute text-yellow-300 pointer-events-none select-none"
+		style={{
+			top: Math.random() * 100 + '%',
+			left: Math.random() * 100 + '%',
+			fontSize: Math.random() * 10 + 10 + 'px',
+		}}>
+		✨
 	</motion.div>
 );
 
@@ -79,7 +103,7 @@ const Countdown = ({ targetDate, onComplete }: CountdownProps) => {
 	];
 
 	return (
-		<div className="relative w-full max-w-4xl mx-auto flex flex-col items-center justify-center p-8">
+		<div className="relative w-full max-w-4xl mx-auto flex flex-col items-center justify-center p-8 min-h-[60vh]">
 			{/* Floating Background Hearts */}
 			<div className="absolute inset-0 overflow-hidden pointer-events-none -z-10">
 				{[...Array(15)].map((_, i) => (
@@ -87,15 +111,25 @@ const Countdown = ({ targetDate, onComplete }: CountdownProps) => {
 				))}
 			</div>
 
-			<div className="bg-white/40 backdrop-blur-md rounded-3xl p-8 md:p-12 shadow-2xl border border-white/50 w-full max-w-3xl">
+			<div className="relative bg-white/30 backdrop-blur-xl rounded-[2rem] p-8 md:p-14 shadow-2xl border border-white/40 w-full max-w-4xl overflow-hidden ring-1 ring-white/60">
+				{/* Background Glow */}
+				<div className="absolute top-0 left-1/4 w-1/2 h-1/2 bg-rose-200/30 blur-[100px] rounded-full pointer-events-none -z-10" />
+
+				{/* Sparkles Overlay */}
+				<div className="absolute inset-0 pointer-events-none overflow-hidden">
+					{[...Array(8)].map((_, i) => (
+						<Sparkle key={`sparkle-${i}`} delay={Math.random() * 2} />
+					))}
+				</div>
+
 				<motion.h2
 					initial={{ opacity: 0, y: -20 }}
 					animate={{ opacity: 1, y: 0 }}
-					className="text-4xl md:text-6xl text-rose-500 font-romantic mb-12 text-center drop-shadow-sm">
+					className="text-5xl md:text-7xl text-rose-500 font-romantic mb-16 text-center drop-shadow-md tracking-wide">
 					Something special is coming...
 				</motion.h2>
 
-				<div className="flex flex-wrap justify-center gap-4 md:gap-8 mb-12">
+				<div className="flex flex-wrap justify-center gap-6 md:gap-10 mb-14">
 					{timeUnits.map((unit, index) => (
 						<motion.div
 							key={unit.label}
@@ -103,13 +137,20 @@ const Countdown = ({ targetDate, onComplete }: CountdownProps) => {
 							animate={{ opacity: 1, scale: 1 }}
 							transition={{ delay: index * 0.1 }}
 							className="flex flex-col items-center">
-							<div className="bg-white/80 w-20 h-20 md:w-32 md:h-32 rounded-2xl flex items-center justify-center shadow-lg border border-rose-100 relative overflow-hidden group">
-								<div className="absolute inset-0 bg-rose-100/30 translate-y-full group-hover:translate-y-0 transition-transform duration-500" />
-								<span className="text-3xl md:text-6xl font-bold text-rose-500 relative z-10">
-									{String(unit.value).padStart(2, '0')}
-								</span>
+							<div className="bg-white/60 w-24 h-24 md:w-36 md:h-36 rounded-3xl flex items-center justify-center shadow-[inset_0_2px_4px_rgba(255,255,255,0.8),0_8px_16px_rgba(225,29,72,0.1)] border border-white/80 relative overflow-hidden group hover:scale-105 transition-transform duration-300">
+								<div className="absolute inset-0 bg-gradient-to-b from-transparent to-rose-50/50 pointer-events-none" />
+								<AnimatePresence mode="popLayout">
+									<motion.span
+										key={unit.value}
+										initial={{ y: 20, opacity: 0 }}
+										animate={{ y: 0, opacity: 1 }}
+										exit={{ y: -20, opacity: 0 }}
+										className="text-4xl md:text-7xl font-bold text-rose-500 relative z-10 font-sans tracking-tight">
+										{String(unit.value).padStart(2, '0')}
+									</motion.span>
+								</AnimatePresence>
 							</div>
-							<span className="mt-4 text-rose-400 font-medium uppercase tracking-widest text-xs md:text-sm">
+							<span className="mt-4 text-rose-400 font-medium uppercase tracking-[0.2em] text-xs md:text-sm bg-white/40 px-3 py-1 rounded-full backdrop-blur-sm border border-white/20">
 								{unit.label}
 							</span>
 						</motion.div>
@@ -120,7 +161,7 @@ const Countdown = ({ targetDate, onComplete }: CountdownProps) => {
 					initial={{ opacity: 0 }}
 					animate={{ opacity: 1 }}
 					transition={{ delay: 0.5 }}
-					className="text-rose-500/80 text-lg md:text-xl italic text-center max-w-lg mx-auto leading-relaxed">
+					className="text-rose-500/90 text-xl md:text-2xl italic text-center max-w-2xl mx-auto leading-relaxed font-light">
 					"Patience is not simply the ability to wait - it's how we behave while
 					we're waiting."
 				</motion.p>

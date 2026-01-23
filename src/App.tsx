@@ -8,7 +8,7 @@ import Countdown from './components/Countdown';
 
 function App() {
 	// Target date: February 14th, 2026 at 6:00 PM
-	const targetDate = '2026-02-14T18:00:00';
+	const targetDate = '2026-02-14T00:00:00';
 
 	const [isUnlocked, setIsUnlocked] = useState(() => {
 		return new Date() >= new Date(targetDate);
