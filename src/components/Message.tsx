@@ -66,38 +66,43 @@ const Message = () => {
 							}}>
 							<div className="mb-8 text-center">
 								<span className="text-romantic-red text-xs font-bold tracking-[0.3em] uppercase opacity-60">
-									My Confession
+									From My Heart
 								</span>
 							</div>
 
 							<div className="font-display text-lg md:text-xl leading-relaxed text-gray-800 space-y-6">
 								<p>
 									<span className="text-5xl text-romantic-red font-romantic float-left mr-3 mt-[-10px] opacity-80">
-										M
+										K
 									</span>
-									y Dearest Kemi,
+									emi,
 								</p>
 								<p>
-									From the moment our paths crossed, my world shifted. Colors
-									became brighter, laughter became louder, and life simply made
-									more sense.
+									I never believed in perfect timing until I met you. Every
+									laugh we've shared, every moment we've spent together has
+									shown me what it means to truly connect with someone.
 								</p>
 								<p>
-									You are the melody in my silence and the calm in my storm. I
-									don't just love you; I cherish the very essence of who you
-									are.
+									You make ordinary days feel extraordinary. Your smile lights
+									up my world, and your presence brings me a peace I've never
+									known before.
+								</p>
+								<p>
+									I don't want to imagine my days without you in them. You've
+									become my favorite person, my best friend, and the one I want
+									to share everything with.
 								</p>
 							</div>
 
 							<div className="mt-12 text-right">
 								<p className="font-romantic text-3xl text-romantic-red transform -rotate-2">
-									Forever Yours,
+									With all my heart,
 									<br />
 									<span className="text-4xl ml-4">Gillette</span>
 								</p>
 							</div>
 
-							{/* Close Button (Optional if they want to replay) */}
+							{/* Close Button */}
 							<button
 								onClick={(e) => {
 									e.stopPropagation();

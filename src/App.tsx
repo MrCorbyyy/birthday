@@ -8,6 +8,7 @@ import Proposal from './components/Proposal';
 import Countdown from './components/Countdown';
 import { Navigation } from './components/Navigation';
 import { MusicPlayer } from './components/MusicPlayer';
+import { AmbientParticles } from './components/AmbientParticles';
 
 function App() {
 	// Target date: February 14th, 2026 at 12:00 AM
@@ -77,6 +78,7 @@ function App() {
 							animate={{ opacity: 1 }}
 							exit={{ opacity: 0 }}
 							transition={{ duration: 1 }}>
+							<AmbientParticles />
 							<MusicPlayer />
 							<Navigation activeSection={activeSection} />
 
@@ -96,7 +98,7 @@ function App() {
 								<Proposal />
 							</div>
 
-							<footer className="py-12 px-6 text-center text-rose-400 bg-gradient-to-t from-white to-transparent">
+							<footer className="pb-32 pt-10 px-6 text-center text-rose-400 bg-gradient-to-t from-white to-transparent">
 								<p className="font-display text-xl mb-2">
 									Made with all my love
 								</p>
