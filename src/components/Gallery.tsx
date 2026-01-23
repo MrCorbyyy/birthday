@@ -1,155 +1,232 @@
-import { useRef } from 'react';
-import { motion, useScroll, useTransform } from 'framer-motion';
+import { useState, useRef } from 'react';
+import { motion } from 'framer-motion';
 
-const photos = [
-	'/IMG_5405.JPG',
-	'/eb4bb98a-2db4-4c19-b87a-df10e6c29956.JPG',
-	'/kemi.JPG',
+// Mock Data for "The Memory Box"
+const memoryItems = [
+	{
+		id: 1,
+		type: 'photo',
+		src: '/IMG_5405.JPG',
+		rotation: -5,
+		x: 10,
+		y: 10,
+		caption: 'The First Spark',
+		date: 'Dec 2023',
+	},
+	{
+		id: 2,
+		type: 'note',
+		content: 'I knew from the very first moment...',
+		rotation: 3,
+		x: 50,
+		y: -20,
+		bg: '#fef3c7',
+	},
+	{
+		id: 3,
+		type: 'photo',
+		src: '/eb4bb98a-2db4-4c19-b87a-df10e6c29956.JPG',
+		rotation: 6,
+		x: -30,
+		y: 40,
+		caption: 'Growing Together',
+		date: 'July 2024',
+	},
+	{
+		id: 4,
+		type: 'ticket',
+		title: 'First Date',
+		location: 'Cinema Paradiso',
+		date: '14 Feb',
+		rotation: -15,
+		x: 200,
+		y: 150,
+	},
+	{
+		id: 5,
+		type: 'photo',
+		src: '/kemi.JPG',
+		rotation: -8,
+		x: -150,
+		y: -50,
+		caption: 'Unbreakable Bond',
+		date: 'Always',
+	},
+	{
+		id: 6,
+		type: 'note',
+		content: 'You are my favorite adventure.',
+		rotation: 12,
+		x: 120,
+		y: 80,
+		bg: '#e0f2fe',
+	},
 ];
 
 const Gallery = () => {
 	const containerRef = useRef(null);
-	const { scrollYProgress } = useScroll({
-		target: containerRef,
-		offset: ['start end', 'end start'],
-	});
-
-	const y1 = useTransform(scrollYProgress, [0, 1], [0, -100]);
-	const y2 = useTransform(scrollYProgress, [0, 1], [0, 100]);
 
 	return (
-		<div
+		<section
 			ref={containerRef}
-			className="py-20 min-h-screen bg-gradient-to-b from-white via-rose-50/30 to-white relative overflow-hidden">
-			{/* Decorative Background */}
-			<div className="absolute inset-0 pointer-events-none opacity-30">
-				{[...Array(8)].map((_, i) => (
-					<motion.div
-						key={i}
-						className="absolute text-rose-200 text-6xl"
-						initial={{
-							x: Math.random() * 100 + '%',
-							y: Math.random() * 100 + '%',
-							rotate: Math.random() * 360,
-							opacity: 0,
-						}}
-						animate={{
-							rotate: [0, 360],
-							opacity: [0.1, 0.3, 0.1],
-						}}
-						transition={{
-							duration: 20,
-							repeat: Infinity,
-							delay: i * 2,
-						}}>
-						💕
-					</motion.div>
+			className="py-24 min-h-screen bg-rose-50 overflow-hidden relative flex flex-col items-center">
+			{/* Header */}
+			<motion.div
+				initial={{ opacity: 0, y: -20 }}
+				whileInView={{ opacity: 1, y: 0 }}
+				className="text-center mb-12 z-20 pointer-events-none">
+				<h2 className="font-display text-4xl md:text-5xl text-gray-800">
+					Our Memory Box
+				</h2>
+				<p className="text-gray-500 mt-2 font-display italic">
+					Shuffle through our moments...
+				</p>
+			</motion.div>
+
+			{/* The Table Surface */}
+			<div className="relative w-full max-w-5xl h-[80vh] bg-rose-100/50 rounded-3xl border-4 border-white shadow-2xl overflow-hidden flex items-center justify-center">
+				{/* Texture */}
+				<div
+					className="absolute inset-0 opacity-20 pointer-events-none mix-blend-multiply"
+					style={{
+						backgroundImage: `url("https://www.transparenttextures.com/patterns/cork-board.png")`,
+					}}
+				/>
+
+				{/* Scattered Items */}
+				{memoryItems.map((item) => (
+					<DraggableItem
+						key={item.id}
+						item={item}
+						containerRef={containerRef}
+					/>
 				))}
 			</div>
 
-			<div className="max-w-6xl mx-auto px-4 relative z-10">
-				<motion.h2
-					initial={{ opacity: 0, y: 30 }}
-					whileInView={{ opacity: 1, y: 0 }}
-					viewport={{ once: true }}
-					transition={{ duration: 0.8 }}
-					className="text-5xl md:text-7xl text-center mb-6 font-romantic">
-					<span className="gradient-text">Beautiful You</span>
-				</motion.h2>
+			<p className="mt-8 text-sm text-gray-400 font-medium uppercase tracking-widest animate-pulse">
+				Drag & Interact
+			</p>
+		</section>
+	);
+};
 
-				<motion.p
-					initial={{ opacity: 0 }}
-					whileInView={{ opacity: 1 }}
-					viewport={{ once: true }}
-					transition={{ duration: 0.8, delay: 0.2 }}
-					className="text-center text-gray-600 text-lg mb-16 font-playfair">
-					Every moment captured, every smile treasured
-				</motion.p>
+const DraggableItem = ({
+	item,
+	containerRef,
+}: {
+	item: any;
+	containerRef: any;
+}) => {
+	const [isFlipped, setIsFlipped] = useState(false);
+	const [zIndex, setZIndex] = useState(1);
 
-				<div className="grid grid-cols-1 md:grid-cols-3 gap-8 items-center">
-					{photos.map((src, index) => (
-						<motion.div
-							key={index}
-							style={{ y: index % 2 === 0 ? y1 : y2 }}
-							initial={{ opacity: 0, scale: 0.9 }}
-							whileInView={{ opacity: 1, scale: 1 }}
-							viewport={{ once: true }}
-							transition={{ duration: 0.6, delay: index * 0.2 }}
-							className="relative group">
-							{/* Gradient Border Container */}
-							<div
-								className="relative p-1 rounded-2xl bg-gradient-to-br from-rose-400 via-purple-400 to-orange-400 animate-gradient hover:shadow-2xl transition-all duration-500"
-								style={{ backgroundSize: '200% 200%' }}>
-								<div className="relative rounded-2xl overflow-hidden bg-white shadow-xl">
-									{/* The Image */}
-									<motion.img
-										src={src}
-										alt={`Memory ${index + 1}`}
-										className="w-full h-[400px] object-cover object-top transition-all duration-500 group-hover:scale-110 group-hover:brightness-110 group-hover:saturate-110"
-										loading="lazy"
-									/>
+	const handleFlip = () => {
+		if (item.type === 'photo') {
+			setIsFlipped(!isFlipped);
+		}
+	};
 
-									{/* Overlay on Hover */}
-									<div className="absolute inset-0 bg-gradient-to-t from-rose-900/80 via-rose-900/40 to-transparent opacity-0 group-hover:opacity-100 transition-all duration-500 flex items-end justify-center p-6">
-										<motion.p
-											initial={{ y: 20, opacity: 0 }}
-											whileInView={{ y: 0, opacity: 1 }}
-											className="text-white text-xl font-playfair italic">
-											Cherished Memory
-										</motion.p>
-									</div>
+	return (
+		<motion.div
+			drag
+			dragConstraints={containerRef}
+			dragElastic={0.2}
+			dragMomentum={false}
+			whileHover={{ scale: 1.05, cursor: 'grab', zIndex: 100 }}
+			whileDrag={{ scale: 1.1, cursor: 'grabbing', zIndex: 100 }}
+			whileTap={{ scale: 0.95 }}
+			onDragStart={() => setZIndex(100)}
+			onDragEnd={() => setZIndex(1)}
+			style={{
+				rotate: item.rotation,
+				x: item.x,
+				y: item.y,
+				position: 'absolute',
+				zIndex: zIndex,
+			}}
+			onClick={handleFlip}
+			className="perspective-1000">
+			<motion.div
+				animate={{ rotateY: isFlipped ? 180 : 0 }}
+				transition={{ duration: 0.6, type: 'spring' }}
+				className="relative preserve-3d"
+				style={{ transformStyle: 'preserve-3d' }}>
+				{/* Photo Polaroid */}
+				{item.type === 'photo' && (
+					<div className="relative">
+						{/* Front */}
+						<div className="w-64 bg-white p-4 pb-12 shadow-xl transform rotate-0 backface-hidden">
+							<div className="w-full h-56 bg-gray-200 overflow-hidden mb-2">
+								<img
+									src={item.src}
+									alt={item.caption}
+									className="w-full h-full object-cover pointer-events-none"
+								/>
+							</div>
+							<p className="font-script text-2xl text-center text-gray-700">
+								{item.caption}
+							</p>
+						</div>
+
+						{/* Back */}
+						<div
+							className="absolute inset-0 w-64 h-full bg-[#fdfbf7] p-6 shadow-xl flex items-center justify-center transform rotate-y-180 backface-hidden"
+							style={{
+								backfaceVisibility: 'hidden',
+								transform: 'rotateY(180deg)',
+							}}>
+							<div className="text-center transform rotate-y-180">
+								{' '}
+								{/* rotate text back */}
+								<p className="font-display text-gray-400 text-sm mb-2">
+									Taken on
+								</p>
+								<p className="font-script text-3xl text-romantic-red">
+									{item.date}
+								</p>
+								<div className="mt-4 text-xs text-gray-400">
+									❤️ Gillette & Kemi
 								</div>
 							</div>
-
-							{/* Decorative Corner Hearts */}
-							<motion.div
-								className="absolute -top-3 -right-3 text-3xl z-20"
-								animate={{
-									rotate: [0, 15, -15, 0],
-									scale: [1, 1.1, 1],
-								}}
-								transition={{
-									duration: 3,
-									repeat: Infinity,
-									delay: index * 0.5,
-								}}>
-								💖
-							</motion.div>
-						</motion.div>
-					))}
-				</div>
-
-				<motion.div
-					className="mt-20 text-center"
-					initial={{ opacity: 0, y: 20 }}
-					whileInView={{ opacity: 1, y: 0 }}
-					viewport={{ once: true }}
-					transition={{ duration: 0.8 }}>
-					<p className="text-2xl md:text-3xl font-playfair italic mb-4">
-						<span className="gradient-text">
-							Every moment with you is my favorite...
-						</span>
-					</p>
-					<div className="flex justify-center gap-3 mt-4">
-						{[...Array(5)].map((_, i) => (
-							<motion.span
-								key={i}
-								animate={{
-									y: [0, -8, 0],
-								}}
-								transition={{
-									duration: 1.5,
-									repeat: Infinity,
-									delay: i * 0.2,
-								}}
-								className="text-2xl">
-								❤️
-							</motion.span>
-						))}
+						</div>
 					</div>
-				</motion.div>
-			</div>
-		</div>
+				)}
+
+				{/* Sticky Note */}
+				{item.type === 'note' && (
+					<div
+						className="w-56 h-56 p-6 shadow-lg flex items-center justify-center"
+						style={{ backgroundColor: item.bg }}>
+						<div className="absolute top-[-10px] left-[50%] -translate-x-1/2 w-24 h-6 bg-rose-200/50 transform -rotate-2" />{' '}
+						{/* Tape */}
+						<p className="font-script text-xl text-gray-800 leading-relaxed text-center">
+							"{item.content}"
+						</p>
+					</div>
+				)}
+
+				{/* Ticket Stub */}
+				{item.type === 'ticket' && (
+					<div className="w-64 h-32 bg-rose-100 border-2 border-dashed border-rose-300 relative flex flex-col justify-between p-4 shadow-md rounded-lg">
+						<div className="flex justify-between items-start border-b border-rose-200 pb-2">
+							<span className="font-display uppercase text-xs tracking-wider text-rose-500">
+								Admit Two
+							</span>
+							<span className="font-bold text-rose-600">{item.date}</span>
+						</div>
+						<div className="text-center">
+							<p className="font-display font-bold text-lg text-gray-800">
+								{item.title}
+							</p>
+							<p className="text-xs text-gray-500 uppercase">{item.location}</p>
+						</div>
+						{/* Cutout circles */}
+						<div className="absolute top-1/2 -left-3 w-6 h-6 bg-rose-50 rounded-full" />
+						<div className="absolute top-1/2 -right-3 w-6 h-6 bg-rose-50 rounded-full" />
+					</div>
+				)}
+			</motion.div>
+		</motion.div>
 	);
 };
 

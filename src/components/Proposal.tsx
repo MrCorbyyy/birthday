@@ -1,225 +1,194 @@
-import { useState, useRef } from 'react';
-import { motion } from 'framer-motion';
+import { useState, useRef, useEffect } from 'react';
+import { motion, AnimatePresence } from 'framer-motion';
 import confetti from 'canvas-confetti';
 import { sendResponse } from '../services/email.service';
 
 const Proposal = () => {
 	const [noCount, setNoCount] = useState(0);
 	const [yesPressed, setYesPressed] = useState(false);
+	const [cinemaMode, setCinemaMode] = useState(false);
 	const noButtonRef = useRef<HTMLButtonElement>(null);
+	const containerRef = useRef<HTMLDivElement>(null);
+
+	// Cinema Mode Effect
+	useEffect(() => {
+		const handleScroll = () => {
+			if (containerRef.current) {
+				const rect = containerRef.current.getBoundingClientRect();
+				const isInView =
+					rect.top < window.innerHeight / 2 &&
+					rect.bottom > window.innerHeight / 2;
+				setCinemaMode(isInView);
+			}
+		};
+		window.addEventListener('scroll', handleScroll);
+		return () => window.removeEventListener('scroll', handleScroll);
+	}, []);
 
 	const handleNoHover = () => {
 		const btn = noButtonRef.current;
-		if (!btn) return;
-
-		const randomX = (Math.random() - 0.5) * 500;
-		const randomY = (Math.random() - 0.5) * 500;
-
-		btn.style.transform = `translate(${randomX}px, ${randomY}px)`;
-		setNoCount((prev) => prev + 1);
+		if (btn) {
+			const x = Math.random() * (window.innerWidth - 300); // constrained to keep somewhat on screen
+			const y = Math.random() * (window.innerHeight - 100);
+			btn.style.position = 'fixed';
+			btn.style.left = `${Math.max(20, x)}px`;
+			btn.style.top = `${Math.max(20, y)}px`;
+		}
+		setNoCount(noCount + 1);
 	};
 
 	const handleYesClick = () => {
 		setYesPressed(true);
 
-		// Send email notification
-		sendResponse('YES');
-
-		// Trigger confetti
-		const duration = 5 * 1000;
+		// Massive Fireworks
+		const duration = 15 * 1000;
 		const animationEnd = Date.now() + duration;
-		const defaults = { startVelocity: 30, spread: 360, ticks: 60, zIndex: 0 };
+		const defaults = { startVelocity: 45, spread: 360, ticks: 100, zIndex: 50 };
 
 		const randomInRange = (min: number, max: number) =>
 			Math.random() * (max - min) + min;
 
-		const interval = setInterval(function () {
+		const interval: any = setInterval(function () {
 			const timeLeft = animationEnd - Date.now();
 
 			if (timeLeft <= 0) {
 				return clearInterval(interval);
 			}
 
-			const particleCount = 50 * (timeLeft / duration);
-			confetti({
-				...defaults,
-				particleCount,
-				origin: { x: randomInRange(0.1, 0.3), y: Math.random() - 0.2 },
-			});
-			confetti({
-				...defaults,
-				particleCount,
-				origin: { x: randomInRange(0.7, 0.9), y: Math.random() - 0.2 },
-			});
-		}, 250);
+			const particleCount = 100 * (timeLeft / duration);
+
+			// Fireworks from sides and bottom
+			confetti(
+				Object.assign({}, defaults, {
+					particleCount,
+					origin: { x: randomInRange(0.1, 0.3), y: Math.random() - 0.2 },
+				}),
+			);
+			confetti(
+				Object.assign({}, defaults, {
+					particleCount,
+					origin: { x: randomInRange(0.7, 0.9), y: Math.random() - 0.2 },
+				}),
+			);
+			confetti(
+				Object.assign({}, defaults, {
+					particleCount,
+					origin: { x: 0.5, y: 1 },
+				}),
+			);
+		}, 200);
+
+		sendResponse('Yes').catch(console.error);
 	};
 
-	const noPhrases = [
-		'No',
-		'Are you sure?',
-		'Really sure?',
-		'Think again!',
-		'Last chance!',
-		'Surely not?',
-		'You might regret this!',
-		'Give it another thought!',
-		'Are you absolutely certain?',
-		'This could be a mistake!',
-		'Have a heart!',
-		"Don't be so cold!",
-		'Change of heart?',
-		"Wouldn't you reconsider?",
-		'Is that your final answer?',
-		"You're breaking my heart ;(",
-	];
-
-	const getNoText = () => {
-		return noPhrases[Math.min(noCount, noPhrases.length - 1)];
+	const getNoButtonText = () => {
+		const phrases = [
+			'No',
+			'Are you sure?',
+			'Really sure?',
+			'Think again!',
+			'Last chance!',
+			'Surely not?',
+			'You might regret this!',
+			'Give it another thought!',
+			'Are you absolutely certain?',
+			'This could be a mistake!',
+			'Have a heart!',
+			"Don't be so cold!",
+			'Change of heart?',
+			"Wouldn't you reconsider?",
+			'Is that your final answer?',
+			"You're breaking my heart ;(",
+		];
+		return phrases[Math.min(noCount, phrases.length - 1)];
 	};
 
 	return (
-		<div className="min-h-screen flex flex-col items-center justify-center p-4 text-center relative overflow-hidden">
-			{/* Animated Gradient Background */}
+		<section
+			ref={containerRef}
+			className={`min-h-screen flex flex-col items-center justify-center relative transition-colors duration-1000 ${cinemaMode ? 'bg-black/95' : 'bg-gradient-to-br from-rose-50 via-white to-pink-50'}`}>
+			{/* Spotlight Effect */}
 			<div
-				className="absolute inset-0 bg-gradient-to-br from-rose-100 via-purple-50 to-orange-100 animate-gradient -z-10"
-				style={{ backgroundSize: '200% 200%' }}
+				className={`absolute inset-0 pointer-events-none transition-opacity duration-1000 ${cinemaMode ? 'opacity-100' : 'opacity-0'}`}
+				style={{
+					background:
+						'radial-gradient(circle at center, rgba(225, 29, 72, 0.15) 0%, transparent 70%)',
+				}}
 			/>
 
-			{/* Floating Hearts Background */}
-			<div className="absolute inset-0 pointer-events-none overflow-hidden -z-5">
-				{[...Array(15)].map((_, i) => (
-					<motion.div
-						key={i}
-						className="absolute text-rose-200 text-5xl"
-						initial={{
-							x: Math.random() * window.innerWidth,
-							y: window.innerHeight + 50,
-							opacity: 0,
-						}}
-						animate={{
-							y: -50,
-							opacity: [0, 0.6, 0],
-							rotate: [0, 360],
-						}}
-						transition={{
-							duration: Math.random() * 10 + 15,
-							repeat: Infinity,
-							delay: Math.random() * 5,
-							ease: 'linear',
-						}}>
-						💕
-					</motion.div>
-				))}
-			</div>
-
-			<div className="relative z-10 w-full max-w-4xl">
+			<AnimatePresence mode="wait">
 				{yesPressed ? (
 					<motion.div
-						initial={{ scale: 0, opacity: 0 }}
-						animate={{ scale: 1, opacity: 1 }}
-						transition={{ duration: 0.5, type: 'spring' }}
-						className="text-center glass-strong rounded-3xl p-12 shadow-2xl">
-						<motion.h1
-							animate={{
-								scale: [1, 1.05, 1],
-							}}
-							transition={{
-								duration: 2,
-								repeat: Infinity,
-							}}
-							className="text-6xl md:text-8xl font-romantic mb-8">
-							<span className="gradient-text">YiPPeeeee!!! 🎉</span>
-						</motion.h1>
-
-						<div className="flex justify-center gap-4 my-6">
-							{[...Array(5)].map((_, i) => (
-								<motion.span
-									key={i}
-									animate={{
-										scale: [1, 1.3, 1],
-										rotate: [0, 360],
-									}}
-									transition={{
-										duration: 1,
-										repeat: Infinity,
-										delay: i * 0.2,
-									}}
-									className="text-5xl">
-									❤️
-								</motion.span>
-							))}
-						</div>
-
-						<p className="text-2xl md:text-3xl text-rose-600 font-playfair mb-8">
-							I promise to make you the happiest girl in the world!
-						</p>
-
-						<img
-							src="https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExM3Z5cWl5ZjQ2bW93c2ZqaHl5cmZ4Z2V3bmV3c2ZqaHl5cmZ4Z2V3biZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/26BRv0ThflsHCqDrG/giphy.gif"
-							alt="Celebration"
-							className="mt-8 rounded-2xl shadow-2xl mx-auto max-w-md w-full border-4 border-white"
-						/>
-					</motion.div>
-				) : (
-					<div className="glass-strong rounded-3xl p-8 md:p-12 shadow-2xl">
+						key="success"
+						initial={{ opacity: 0, scale: 0.8 }}
+						animate={{ opacity: 1, scale: 1 }}
+						transition={{ duration: 0.8, ease: 'easeOut' }}
+						className="relative z-10 text-center">
+						{/* Glowing Text */}
 						<motion.h2
-							initial={{ opacity: 0, scale: 0.9 }}
-							whileInView={{ opacity: 1, scale: 1 }}
-							viewport={{ once: true }}
-							className="text-5xl md:text-7xl mb-12 font-romantic">
-							<span className="gradient-text">
-								Kemi, will you be my Girlfriend?
-							</span>
+							animate={{
+								textShadow: [
+									'0 0 10px rgba(225, 29, 72, 0.2)',
+									'0 0 30px rgba(225, 29, 72, 0.6)',
+									'0 0 10px rgba(225, 29, 72, 0.2)',
+								],
+							}}
+							transition={{ duration: 2, repeat: Infinity }}
+							className="font-romantic text-6xl md:text-9xl text-white mb-8">
+							She said Yes!
 						</motion.h2>
 
-						<div className="flex flex-col md:flex-row items-center justify-center gap-8 relative h-40">
-							{/* Yes Button with Pulsing Glow */}
-							<motion.button
-								onClick={handleYesClick}
-								whileHover={{ scale: 1.1 }}
-								whileTap={{ scale: 0.95 }}
-								animate={{
-									boxShadow: [
-										'0 0 20px rgba(225, 29, 72, 0.4)',
-										'0 0 40px rgba(225, 29, 72, 0.6)',
-										'0 0 20px rgba(225, 29, 72, 0.4)',
-									],
-								}}
-								transition={{
-									boxShadow: {
-										duration: 2,
-										repeat: Infinity,
-									},
-								}}
-								className="relative bg-gradient-to-r from-rose-500 to-rose-600 hover:from-rose-600 hover:to-rose-700 text-white font-bold py-5 px-14 rounded-full text-2xl md:text-3xl shadow-lg z-20 overflow-hidden group">
-								{/* Shimmer Effect */}
-								<div className="absolute inset-0 animate-shimmer opacity-0 group-hover:opacity-100" />
-								<span className="relative z-10">Yes 💖</span>
-							</motion.button>
-
-							{/* No Button that Runs Away */}
-							<motion.button
-								ref={noButtonRef}
-								onMouseEnter={handleNoHover}
-								onClick={handleNoHover}
-								whileHover={{ scale: 1.05 }}
-								className="bg-gray-300 hover:bg-gray-400 text-gray-700 font-medium py-3 px-10 rounded-full text-lg md:text-xl absolute md:static transition-all duration-200 ease-out shadow-md">
-								{getNoText()}
-							</motion.button>
-						</div>
-
-						{/* Hint Text */}
 						<motion.p
 							initial={{ opacity: 0 }}
 							animate={{ opacity: 1 }}
-							transition={{ delay: 1 }}
-							className="mt-12 text-gray-500 text-sm italic">
-							(Psst... there's only one right answer 😉)
+							transition={{ delay: 0.5 }}
+							className="font-display text-2xl md:text-3xl text-gray-300">
+							I love you, Kemi. Today is just the beginning.
 						</motion.p>
-					</div>
+					</motion.div>
+				) : (
+					<motion.div
+						key="question"
+						initial={{ opacity: 0, scale: 0.9 }}
+						whileInView={{ opacity: 1, scale: 1 }}
+						viewport={{ once: true }}
+						transition={{ duration: 1 }}
+						className="z-10 text-center px-4 max-w-4xl">
+						<motion.div
+							animate={{ opacity: cinemaMode ? 1 : 0.8 }}
+							className="mb-16">
+							<span className="block text-romantic-red text-sm tracking-[0.4em] uppercase mb-6">
+								The Final Question
+							</span>
+							<h2
+								className={`font-display text-4xl md:text-7xl leading-tight transition-colors duration-1000 ${cinemaMode ? 'text-white' : 'text-gray-800'}`}>
+								Will you make me the happiest man alive and be my girlfriend?
+							</h2>
+						</motion.div>
+
+						<div className="flex flex-col md:flex-row items-center justify-center gap-8 md:gap-16">
+							<motion.button
+								whileHover={{
+									scale: 1.1,
+									boxShadow: '0 0 30px rgba(225, 29, 72, 0.5)',
+								}}
+								whileTap={{ scale: 0.95 }}
+								onClick={handleYesClick}
+								className="px-16 py-6 bg-romantic-red text-white text-2xl font-medium rounded-full shadow-2xl hover:bg-rose-600 transition-all duration-300 min-w-[240px]">
+								Yes
+							</motion.button>
+
+							<motion.button
+								ref={noButtonRef}
+								onMouseEnter={handleNoHover}
+								className={`px-16 py-6 text-xl font-medium rounded-full transition-colors duration-300 min-w-[240px] ${cinemaMode ? 'bg-white/10 text-gray-400 hover:bg-white/20' : 'bg-gray-100 text-gray-500 hover:bg-gray-200'}`}>
+								{getNoButtonText()}
+							</motion.button>
+						</div>
+					</motion.div>
 				)}
-			</div>
-		</div>
+			</AnimatePresence>
+		</section>
 	);
 };
 

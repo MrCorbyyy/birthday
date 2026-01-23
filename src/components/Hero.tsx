@@ -1,150 +1,96 @@
-import { motion } from 'framer-motion';
+import { motion, useScroll, useTransform } from 'framer-motion';
+import { ChevronDown } from 'lucide-react';
+import { useRef } from 'react';
 
 const Hero = () => {
+	const containerRef = useRef(null);
+	const { scrollYProgress } = useScroll({
+		target: containerRef,
+		offset: ['start start', 'end start'],
+	});
+
+	const opacity = useTransform(scrollYProgress, [0, 0.5], [1, 0]);
+	const scale = useTransform(scrollYProgress, [0, 0.5], [1, 0.8]);
+	const y = useTransform(scrollYProgress, [0, 0.5], [0, 100]);
+
+	const scrollToGallery = () => {
+		const gallery = document.getElementById('gallery');
+		if (gallery) {
+			gallery.scrollIntoView({ behavior: 'smooth' });
+		}
+	};
+
 	return (
-		<div className="min-h-screen flex flex-col items-center justify-center relative overflow-hidden">
-			{/* Animated Gradient Background */}
-			<div className="absolute inset-0 bg-gradient-to-br from-rose-100 via-purple-50 to-orange-50 animate-gradient" />
-
-			{/* Particle System - Hearts */}
-			<div className="absolute inset-0 pointer-events-none overflow-hidden">
-				{[...Array(25)].map((_, i) => (
+		<motion.div
+			ref={containerRef}
+			style={{ opacity }}
+			className="relative h-screen w-full flex flex-col items-center justify-center overflow-hidden bg-rose-50">
+			{/* The Pulse Visualization */}
+			<div className="absolute inset-0 flex items-center justify-center pointer-events-none">
+				{[...Array(3)].map((_, i) => (
 					<motion.div
-						key={`heart-${i}`}
-						className="absolute text-rose-300"
-						initial={{
-							x: Math.random() * window.innerWidth,
-							y: window.innerHeight + 100,
-							scale: Math.random() * 0.5 + 0.5,
-							opacity: 0,
+						key={i}
+						className="absolute border border-romantic-red/20 rounded-full"
+						style={{
+							width: '40vw',
+							height: '40vw',
 						}}
 						animate={{
-							y: -100,
-							x: Math.random() * window.innerWidth,
-							rotate: [0, 360],
-							opacity: [0, 0.4, 0.6, 0.4, 0],
+							scale: [1, 1.5, 2],
+							opacity: [0.5, 0.2, 0],
 						}}
 						transition={{
-							duration: Math.random() * 15 + 15,
+							duration: 3,
 							repeat: Infinity,
-							ease: 'linear',
-							delay: Math.random() * 5,
+							delay: i * 1,
+							ease: 'easeInOut',
 						}}
-						style={{ fontSize: `${Math.random() * 2 + 1}rem` }}>
-						❤
-					</motion.div>
+					/>
 				))}
+
+				{/* Central Core */}
+				<div className="relative z-10 w-64 h-64 bg-gradient-to-br from-rose-100 to-white rounded-full blur-3xl opacity-60 animate-pulse-slow" />
 			</div>
 
-			{/* Sparkles */}
-			<div className="absolute inset-0 pointer-events-none">
-				{[...Array(15)].map((_, i) => (
-					<motion.div
-						key={`sparkle-${i}`}
-						className="absolute"
-						initial={{
-							x: Math.random() * window.innerWidth,
-							y: Math.random() * window.innerHeight,
-							scale: 0,
-							opacity: 0,
-						}}
-						animate={{
-							scale: [0, 1, 0],
-							opacity: [0, 1, 0],
-							rotate: [0, 180],
-						}}
-						transition={{
-							duration: 2,
-							repeat: Infinity,
-							delay: Math.random() * 3,
-							repeatDelay: Math.random() * 2,
-						}}
-						style={{ fontSize: `${Math.random() * 1.5 + 0.5}rem` }}>
-						✨
-					</motion.div>
-				))}
-			</div>
-
+			{/* Content Portal */}
 			<motion.div
-				initial={{ opacity: 0, y: 50 }}
-				animate={{ opacity: 1, y: 0 }}
-				transition={{ duration: 1.5 }}
-				className="z-10 text-center px-4 max-w-5xl">
-				{/* Main Heading with Gradient */}
-				<motion.h1
-					animate={{
-						scale: [1, 1.02, 1],
-					}}
-					transition={{
-						duration: 3,
-						repeat: Infinity,
-						ease: 'easeInOut',
-					}}
-					className="text-6xl md:text-8xl lg:text-9xl mb-6 font-romantic">
-					<span className="gradient-text text-shadow-glow">Hey Kemi...</span>
-				</motion.h1>
-
-				{/* Subheading */}
-				<motion.p
-					initial={{ opacity: 0 }}
-					animate={{ opacity: 1 }}
-					transition={{ delay: 0.8, duration: 1 }}
-					className="text-xl md:text-2xl lg:text-3xl text-gray-700 font-light max-w-3xl mx-auto leading-relaxed mb-4">
-					I've been thinking about us, about all our moments...
-				</motion.p>
-
-				<motion.p
-					initial={{ opacity: 0 }}
-					animate={{ opacity: 1 }}
-					transition={{ delay: 1.2, duration: 1 }}
-					className="text-xl md:text-2xl lg:text-3xl font-playfair text-rose-600 max-w-3xl mx-auto">
-					and I wanted to ask you something special.
-				</motion.p>
-
-				{/* Decorative Hearts */}
+				style={{ scale, y }}
+				className="relative z-20 text-center space-y-12 max-w-4xl px-6">
 				<motion.div
-					initial={{ opacity: 0, scale: 0 }}
+					initial={{ opacity: 0, scale: 0.9 }}
 					animate={{ opacity: 1, scale: 1 }}
-					transition={{ delay: 1.8, duration: 0.5 }}
-					className="flex justify-center gap-4 my-8">
-					{[...Array(3)].map((_, i) => (
-						<motion.span
-							key={i}
-							animate={{
-								y: [0, -10, 0],
-							}}
-							transition={{
-								duration: 2,
-								repeat: Infinity,
-								delay: i * 0.3,
-							}}
-							className="text-4xl md:text-5xl">
-							💕
-						</motion.span>
-					))}
+					transition={{ duration: 1.5, ease: 'easeOut' }}>
+					<h1 className="font-display text-6xl md:text-8xl lg:text-9xl text-gray-800 leading-tight tracking-tight mix-blend-multiply">
+						<span className="block text-romantic-red text-opacity-90">Our</span>
+						<span className="block italic font-light">Journey</span>
+					</h1>
 				</motion.div>
 
-				{/* Scroll Indicator */}
-				<motion.div
-					className="mt-16"
-					initial={{ opacity: 0 }}
-					animate={{ opacity: 1 }}
-					transition={{ delay: 2.5, duration: 1 }}>
-					<motion.div
-						animate={{
-							y: [0, 10, 0],
-							opacity: [0.5, 1, 0.5],
-						}}
-						transition={{ repeat: Infinity, duration: 2 }}
-						className="flex flex-col items-center">
-						<span className="text-rose-500 text-sm tracking-widest uppercase font-medium mb-2">
-							Scroll Down
-						</span>
-						<span className="text-rose-500 text-5xl">↓</span>
-					</motion.div>
-				</motion.div>
+				<motion.button
+					onClick={scrollToGallery}
+					initial={{ opacity: 0, y: 20 }}
+					animate={{ opacity: 1, y: 0 }}
+					whileHover={{ scale: 1.05 }}
+					whileTap={{ scale: 0.95 }}
+					transition={{ delay: 1, duration: 0.5 }}
+					className="group relative inline-flex items-center gap-4 px-8 py-4 bg-white/80 backdrop-blur-sm rounded-full shadow-lg hover:shadow-xl transition-all duration-300 border border-white/50">
+					<span className="text-gray-600 uppercase tracking-[0.2em] text-sm font-medium group-hover:text-romantic-red transition-colors">
+						Enter The Story
+					</span>
+					<span className="w-8 h-8 rounded-full bg-rose-50 flex items-center justify-center group-hover:bg-romantic-red group-hover:text-white transition-colors duration-300">
+						<ChevronDown className="w-4 h-4" />
+					</span>
+				</motion.button>
 			</motion.div>
-		</div>
+
+			{/* Cinematic Grain */}
+			<div
+				className="absolute inset-0 opacity-[0.04] pointer-events-none mix-blend-overlay"
+				style={{
+					backgroundImage: `url("data:image/svg+xml,%3Csvg viewBox='0 0 400 400' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E")`,
+				}}
+			/>
+		</motion.div>
 	);
 };
 

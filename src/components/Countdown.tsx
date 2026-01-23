@@ -106,7 +106,7 @@ const Countdown = ({ targetDate, onComplete }: CountdownProps) => {
 		<div className="relative w-full max-w-4xl mx-auto flex flex-col items-center justify-center p-8 min-h-[60vh]">
 			{/* Animated Mesh Background */}
 			<div
-				className="absolute inset-0 -z-20 animate-gradient bg-gradient-to-br from-rose-100 via-purple-100 to-orange-100"
+				className="absolute inset-0 -z-20 animate-gradient bg-gradient-to-br from-rose-100 via-pink-100 to-rose-50"
 				style={{ backgroundSize: '200% 200%' }}
 			/>
 
@@ -121,7 +121,7 @@ const Countdown = ({ targetDate, onComplete }: CountdownProps) => {
 				{/* Enhanced Background Glow */}
 				<div className="absolute top-0 left-1/4 w-1/2 h-1/2 bg-rose-300/40 blur-[120px] rounded-full pointer-events-none -z-10 animate-pulse-glow" />
 				<div
-					className="absolute bottom-0 right-1/4 w-1/2 h-1/2 bg-purple-300/40 blur-[120px] rounded-full pointer-events-none -z-10 animate-pulse-glow"
+					className="absolute bottom-0 right-1/4 w-1/2 h-1/2 bg-pink-300/40 blur-[120px] rounded-full pointer-events-none -z-10 animate-pulse-glow"
 					style={{ animationDelay: '1s' }}
 				/>
 
@@ -150,7 +150,7 @@ const Countdown = ({ targetDate, onComplete }: CountdownProps) => {
 							<div className="relative w-24 h-24 md:w-36 md:h-36 rounded-3xl flex items-center justify-center overflow-hidden transition-all duration-300 group-hover:scale-110">
 								{/* Animated Border Gradient */}
 								<div
-									className="absolute inset-0 bg-gradient-to-br from-rose-400 via-purple-400 to-orange-400 animate-gradient opacity-60"
+									className="absolute inset-0 bg-gradient-to-br from-rose-400 via-pink-400 to-rose-500 animate-gradient opacity-60"
 									style={{ backgroundSize: '200% 200%' }}
 								/>
 								<div className="absolute inset-[3px] bg-white/80 backdrop-blur-xl rounded-[1.4rem]" />
@@ -163,14 +163,14 @@ const Countdown = ({ targetDate, onComplete }: CountdownProps) => {
 											initial={{ y: 20, opacity: 0 }}
 											animate={{ y: 0, opacity: 1 }}
 											exit={{ y: -20, opacity: 0 }}
-											className="text-4xl md:text-7xl font-bold bg-gradient-to-br from-rose-600 to-purple-600 bg-clip-text text-transparent font-sans tracking-tight">
+											className="text-4xl md:text-7xl font-bold bg-gradient-to-br from-rose-600 to-pink-600 bg-clip-text text-transparent font-sans tracking-tight">
 											{String(unit.value).padStart(2, '0')}
 										</motion.span>
 									</AnimatePresence>
 								</div>
 
 								{/* Glow Effect on Hover */}
-								<div className="absolute inset-0 bg-gradient-to-br from-rose-400/0 via-purple-400/0 to-orange-400/0 group-hover:from-rose-400/20 group-hover:via-purple-400/20 group-hover:to-orange-400/20 rounded-3xl transition-all duration-300" />
+								<div className="absolute inset-0 bg-gradient-to-br from-rose-400/0 via-pink-400/0 to-rose-500/0 group-hover:from-rose-400/20 group-hover:via-pink-400/20 group-hover:to-rose-500/20 rounded-3xl transition-all duration-300" />
 							</div>
 							<span className="mt-4 text-rose-500 font-semibold uppercase tracking-[0.2em] text-xs md:text-sm bg-white/60 px-4 py-2 rounded-full backdrop-blur-sm border border-white/40 shadow-sm">
 								{unit.label}

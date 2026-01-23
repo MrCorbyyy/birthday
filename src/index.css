@@ -6,40 +6,24 @@
 @custom-variant dark (&:is(.dark *));
 
 :root {
-	/* Enhanced Color Palette - HSL based for vibrancy */
-	--color-rose-50: hsl(350, 100%, 98%);
-	--color-rose-100: hsl(350, 100%, 95%);
-	--color-rose-200: hsl(351, 100%, 90%);
-	--color-rose-300: hsl(351, 95%, 80%);
-	--color-rose-400: hsl(351, 90%, 70%);
-	--color-rose-500: hsl(350, 85%, 60%);
-	--color-rose-600: hsl(350, 80%, 50%);
-	--color-rose-700: hsl(350, 75%, 40%);
-
-	--color-purple-400: hsl(280, 70%, 70%);
-	--color-purple-500: hsl(280, 65%, 60%);
-
-	--color-orange-400: hsl(25, 95%, 70%);
-	--color-orange-500: hsl(25, 90%, 60%);
+	/* Simple Color Palette */
+	--color-romantic-red: #e11d48;
+	--color-soft-pink: #fff1f2;
 
 	/* Gradients */
 	--gradient-romantic: linear-gradient(
 		135deg,
-		var(--color-rose-400) 0%,
-		var(--color-purple-400) 50%,
-		var(--color-orange-400) 100%
+		#fda4af 0%,
+		#fb7185 50%,
+		#e11d48 100%
 	);
 	--gradient-soft: linear-gradient(
 		135deg,
-		var(--color-rose-50) 0%,
+		#fff1f2 0%,
 		#ffffff 50%,
-		var(--color-rose-100) 100%
+		#ffe4e6 100%
 	);
-	--gradient-vibrant: linear-gradient(
-		135deg,
-		var(--color-rose-500) 0%,
-		var(--color-purple-500) 100%
-	);
+	--gradient-vibrant: linear-gradient(135deg, #e11d48 0%, #f43f5e 100%);
 
 	/* Shadows */
 	--shadow-soft:
@@ -232,14 +216,39 @@ h3,
 }
 
 ::-webkit-scrollbar-track {
-	background: var(--color-rose-50);
+	background: var(--color-soft-pink);
 }
 
 ::-webkit-scrollbar-thumb {
-	background: var(--color-rose-400);
+	background: linear-gradient(to bottom, #fda4af, #e11d48);
 	border-radius: 5px;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-	background: var(--color-rose-500);
+	background: var(--color-romantic-red);
+}
+
+/* Hide scrollbar utility */
+.hide-scrollbar::-webkit-scrollbar {
+	display: none;
+}
+.hide-scrollbar {
+	-ms-overflow-style: none;
+	scrollbar-width: none;
+}
+
+/* Custom Animations */
+@keyframes pulse-slow {
+	0%,
+	100% {
+		transform: scale(1);
+		opacity: 0.5;
+	}
+	50% {
+		transform: scale(1.05);
+		opacity: 0.8;
+	}
+}
+.animate-pulse-slow {
+	animation: pulse-slow 8s ease-in-out infinite;
 }

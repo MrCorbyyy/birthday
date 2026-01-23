@@ -17,6 +17,7 @@
     "@types/canvas-confetti": "^1.9.0",
     "canvas-confetti": "^1.9.4",
     "framer-motion": "^12.23.12",
+    "lucide-react": "^0.563.0",
     "react": "^19.1.1",
     "react-dom": "^19.1.1",
     "react-hot-toast": "^2.6.0",
