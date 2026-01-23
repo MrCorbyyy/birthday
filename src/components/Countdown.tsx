@@ -33,10 +33,10 @@ const FloatingHeart = ({ delay }: { delay: number }) => (
 		animate={{
 			y: '-100vh',
 			opacity: [0, 1, 0],
-			x: [0, Math.random() * 100 - 50, 0], // Random horizontal sway
+			x: [0, Math.random() * 100 - 50, 0],
 		}}
 		transition={{
-			duration: Math.random() * 5 + 10, // 10-15s float duration
+			duration: Math.random() * 5 + 10,
 			repeat: Infinity,
 			delay: delay,
 			ease: 'linear',
@@ -104,6 +104,12 @@ const Countdown = ({ targetDate, onComplete }: CountdownProps) => {
 
 	return (
 		<div className="relative w-full max-w-4xl mx-auto flex flex-col items-center justify-center p-8 min-h-[60vh]">
+			{/* Animated Mesh Background */}
+			<div
+				className="absolute inset-0 -z-20 animate-gradient bg-gradient-to-br from-rose-100 via-purple-100 to-orange-100"
+				style={{ backgroundSize: '200% 200%' }}
+			/>
+
 			{/* Floating Background Hearts */}
 			<div className="absolute inset-0 overflow-hidden pointer-events-none -z-10">
 				{[...Array(15)].map((_, i) => (
@@ -111,9 +117,13 @@ const Countdown = ({ targetDate, onComplete }: CountdownProps) => {
 				))}
 			</div>
 
-			<div className="relative bg-white/30 backdrop-blur-xl rounded-[2rem] p-8 md:p-14 shadow-2xl border border-white/40 w-full max-w-4xl overflow-hidden ring-1 ring-white/60">
-				{/* Background Glow */}
-				<div className="absolute top-0 left-1/4 w-1/2 h-1/2 bg-rose-200/30 blur-[100px] rounded-full pointer-events-none -z-10" />
+			<div className="relative glass-strong rounded-[2rem] p-8 md:p-14 shadow-2xl w-full max-w-4xl overflow-hidden">
+				{/* Enhanced Background Glow */}
+				<div className="absolute top-0 left-1/4 w-1/2 h-1/2 bg-rose-300/40 blur-[120px] rounded-full pointer-events-none -z-10 animate-pulse-glow" />
+				<div
+					className="absolute bottom-0 right-1/4 w-1/2 h-1/2 bg-purple-300/40 blur-[120px] rounded-full pointer-events-none -z-10 animate-pulse-glow"
+					style={{ animationDelay: '1s' }}
+				/>
 
 				{/* Sparkles Overlay */}
 				<div className="absolute inset-0 pointer-events-none overflow-hidden">
@@ -125,8 +135,8 @@ const Countdown = ({ targetDate, onComplete }: CountdownProps) => {
 				<motion.h2
 					initial={{ opacity: 0, y: -20 }}
 					animate={{ opacity: 1, y: 0 }}
-					className="text-5xl md:text-7xl text-rose-500 font-romantic mb-16 text-center drop-shadow-md tracking-wide">
-					Something special is coming...
+					className="text-5xl md:text-7xl font-romantic mb-16 text-center tracking-wide">
+					<span className="gradient-text">Something special is coming...</span>
 				</motion.h2>
 
 				<div className="flex flex-wrap justify-center gap-6 md:gap-10 mb-14">
@@ -136,21 +146,33 @@ const Countdown = ({ targetDate, onComplete }: CountdownProps) => {
 							initial={{ opacity: 0, scale: 0.5 }}
 							animate={{ opacity: 1, scale: 1 }}
 							transition={{ delay: index * 0.1 }}
-							className="flex flex-col items-center">
-							<div className="bg-white/60 w-24 h-24 md:w-36 md:h-36 rounded-3xl flex items-center justify-center shadow-[inset_0_2px_4px_rgba(255,255,255,0.8),0_8px_16px_rgba(225,29,72,0.1)] border border-white/80 relative overflow-hidden group hover:scale-105 transition-transform duration-300">
-								<div className="absolute inset-0 bg-gradient-to-b from-transparent to-rose-50/50 pointer-events-none" />
-								<AnimatePresence mode="popLayout">
-									<motion.span
-										key={unit.value}
-										initial={{ y: 20, opacity: 0 }}
-										animate={{ y: 0, opacity: 1 }}
-										exit={{ y: -20, opacity: 0 }}
-										className="text-4xl md:text-7xl font-bold text-rose-500 relative z-10 font-sans tracking-tight">
-										{String(unit.value).padStart(2, '0')}
-									</motion.span>
-								</AnimatePresence>
+							className="flex flex-col items-center group">
+							<div className="relative w-24 h-24 md:w-36 md:h-36 rounded-3xl flex items-center justify-center overflow-hidden transition-all duration-300 group-hover:scale-110">
+								{/* Animated Border Gradient */}
+								<div
+									className="absolute inset-0 bg-gradient-to-br from-rose-400 via-purple-400 to-orange-400 animate-gradient opacity-60"
+									style={{ backgroundSize: '200% 200%' }}
+								/>
+								<div className="absolute inset-[3px] bg-white/80 backdrop-blur-xl rounded-[1.4rem]" />
+
+								{/* Content */}
+								<div className="relative z-10">
+									<AnimatePresence mode="popLayout">
+										<motion.span
+											key={unit.value}
+											initial={{ y: 20, opacity: 0 }}
+											animate={{ y: 0, opacity: 1 }}
+											exit={{ y: -20, opacity: 0 }}
+											className="text-4xl md:text-7xl font-bold bg-gradient-to-br from-rose-600 to-purple-600 bg-clip-text text-transparent font-sans tracking-tight">
+											{String(unit.value).padStart(2, '0')}
+										</motion.span>
+									</AnimatePresence>
+								</div>
+
+								{/* Glow Effect on Hover */}
+								<div className="absolute inset-0 bg-gradient-to-br from-rose-400/0 via-purple-400/0 to-orange-400/0 group-hover:from-rose-400/20 group-hover:via-purple-400/20 group-hover:to-orange-400/20 rounded-3xl transition-all duration-300" />
 							</div>
-							<span className="mt-4 text-rose-400 font-medium uppercase tracking-[0.2em] text-xs md:text-sm bg-white/40 px-3 py-1 rounded-full backdrop-blur-sm border border-white/20">
+							<span className="mt-4 text-rose-500 font-semibold uppercase tracking-[0.2em] text-xs md:text-sm bg-white/60 px-4 py-2 rounded-full backdrop-blur-sm border border-white/40 shadow-sm">
 								{unit.label}
 							</span>
 						</motion.div>
@@ -161,7 +183,7 @@ const Countdown = ({ targetDate, onComplete }: CountdownProps) => {
 					initial={{ opacity: 0 }}
 					animate={{ opacity: 1 }}
 					transition={{ delay: 0.5 }}
-					className="text-rose-500/90 text-xl md:text-2xl italic text-center max-w-2xl mx-auto leading-relaxed font-light">
+					className="text-rose-600 text-xl md:text-2xl italic text-center max-w-2xl mx-auto leading-relaxed font-playfair">
 					"Patience is not simply the ability to wait - it's how we behave while
 					we're waiting."
 				</motion.p>
