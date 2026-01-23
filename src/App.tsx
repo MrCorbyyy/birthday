@@ -21,7 +21,7 @@ function App() {
 
 			<main className="w-full">
 				<AnimatePresence mode="wait">
-					{!isUnlocked ? (
+					{isUnlocked ? (
 						<motion.div
 							key="content"
 							initial={{ opacity: 0 }}
