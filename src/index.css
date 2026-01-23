@@ -1,0 +1,25 @@
+@import url('https://fonts.googleapis.com/css2?family=Great+Vibes&family=Montserrat:wght@300;400;600&display=swap');
+
+@import 'tailwindcss';
+@plugin '.././hero.ts';
+@source '../node_modules/@heroui/theme/dist/**/*.{js,ts,jsx,tsx}';
+@custom-variant dark (&:is(.dark *));
+
+:root {
+	--color-romantic-red: #e11d48;
+	--color-soft-pink: #fff1f2;
+}
+
+body {
+	font-family: 'Montserrat', sans-serif;
+	background-color: var(--color-soft-pink);
+	color: #4a4a4a;
+	overflow-x: hidden;
+}
+
+h1,
+h2,
+h3,
+.font-romantic {
+	font-family: 'Great Vibes', cursive;
+}
