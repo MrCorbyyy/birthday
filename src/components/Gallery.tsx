@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { ChevronLeft, ChevronRight, X, Heart } from 'lucide-react';
+import { ChevronLeft, ChevronRight, X } from 'lucide-react';
 
 const photos = [
 	{
@@ -24,13 +24,13 @@ const photos = [
 	{
 		src: '/kemi.JPG',
 		caption: 'My Beautiful Kemi',
-		date: 'Always',
+		date: 'Jan 1, 2026',
 		color: '#fca5a5',
 	},
 	{
 		src: '/me.JPEG',
 		caption: 'Hi!  Gillette',
-		date: 'Always',
+		date: 'Feb 19, 2025',
 		color: '#fdba74',
 	},
 	{
@@ -39,7 +39,12 @@ const photos = [
 		date: 'Always',
 		color: '#a5f3fc',
 	},
-	{ src: '/me4.JPG', caption: 'Suit Up', date: 'Always', color: '#d8b4fe' },
+	{
+		src: '/me4.JPG',
+		caption: 'Suit Up',
+		date: 'Jan 5, 2026',
+		color: '#d8b4fe',
+	},
 ];
 
 const Gallery = () => {
@@ -88,7 +93,7 @@ const Gallery = () => {
 	const currentPhoto = photos[currentIndex];
 
 	return (
-		<section className="relative min-h-screen py-24 bg-gradient-to-br from-gray-900 via-rose-950 to-gray-900 overflow-hidden flex flex-col items-center justify-center">
+		<section className="relative min-h-screen pt-10 pb-24 bg-gradient-to-br from-gray-900 via-rose-950 to-gray-900 overflow-hidden flex flex-col items-center justify-center">
 			{/* Animated Background Gradient Orbs */}
 			<div className="absolute inset-0 overflow-hidden pointer-events-none">
 				<motion.div
@@ -115,13 +120,13 @@ const Gallery = () => {
 				whileInView={{ opacity: 1, y: 0 }}
 				viewport={{ once: true }}
 				className="text-center mb-16 z-10">
-				<motion.div
+				{/* <motion.div
 					animate={{ scale: [1, 1.05, 1] }}
 					transition={{ duration: 2, repeat: Infinity }}
 					className="inline-block mb-4">
 					<Heart className="w-12 h-12 text-rose-400 fill-rose-400" />
-				</motion.div>
-				<h2 className="font-display text-5xl md:text-6xl text-white mb-4">
+				</motion.div> */}
+				<h2 className="text-5xl md:text-6xl text-white mb-4">
 					Our Story in Frames
 				</h2>
 				<p className="text-rose-200 text-lg font-light">
@@ -265,7 +270,7 @@ const Gallery = () => {
 							<img
 								src={currentPhoto.src}
 								alt={currentPhoto.caption}
-								className="max-h-[90vh] w-auto rounded-2xl shadow-2xl"
+								className="max-h-[75vh] w-auto rounded-2xl shadow-2xl"
 							/>
 							<div className="mt-8 text-center">
 								<h3 className="font-script text-5xl text-white mb-3">

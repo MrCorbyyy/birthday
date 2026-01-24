@@ -29,7 +29,7 @@ export const Navigation: React.FC<NavigationProps> = ({ activeSection }) => {
 					initial={{ y: 100, opacity: 0 }}
 					animate={{ y: 0, opacity: 1 }}
 					exit={{ y: 100, opacity: 0 }}
-					className="flex items-center gap-2 px-6 py-3 rounded-full bg-white/80 backdrop-blur-md shadow-lg border border-white/50">
+					className="flex items-center gap-2 px-1 py-1 rounded-full bg-white/80 backdrop-blur-md shadow-lg border border-white/50">
 					{navItems.map((item) => (
 						<button
 							key={item.id}
