@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { ChevronLeft, ChevronRight, X } from 'lucide-react';
+import { useParallax } from '../hooks/useParallax';
 
 const photos = [
 	{
@@ -52,6 +53,10 @@ const Gallery = () => {
 	const [direction, setDirection] = useState(0);
 	const [isZoomed, setIsZoomed] = useState(false);
 
+	// Parallax refs for background elements
+	const parallaxOrb1 = useParallax({ speed: 0.3 });
+	const parallaxOrb2 = useParallax({ speed: 0.5 });
+
 	const slideVariants = {
 		enter: (direction: number) => ({
 			x: direction > 0 ? 1000 : -1000,
@@ -94,23 +99,25 @@ const Gallery = () => {
 
 	return (
 		<section className="relative min-h-screen pt-10 pb-24 bg-gradient-to-br from-gray-900 via-rose-950 to-gray-900 overflow-hidden flex flex-col items-center justify-center">
-			{/* Animated Background Gradient Orbs */}
+			{/* Animated Background Gradient Orbs with Parallax */}
 			<div className="absolute inset-0 overflow-hidden pointer-events-none">
 				<motion.div
+					ref={parallaxOrb1}
 					animate={{
 						scale: [1, 1.2, 1],
 						opacity: [0.3, 0.5, 0.3],
 					}}
 					transition={{ duration: 8, repeat: Infinity }}
-					className="absolute top-1/4 left-1/4 w-96 h-96 bg-rose-500/20 rounded-full blur-3xl"
+					className="absolute top-1/4 left-1/4 w-96 h-96 bg-rose-500/20 rounded-full blur-3xl parallax-slow"
 				/>
 				<motion.div
+					ref={parallaxOrb2}
 					animate={{
 						scale: [1.2, 1, 1.2],
 						opacity: [0.2, 0.4, 0.2],
 					}}
 					transition={{ duration: 10, repeat: Infinity }}
-					className="absolute bottom-1/4 right-1/4 w-[500px] h-[500px] bg-purple-500/20 rounded-full blur-3xl"
+					className="absolute bottom-1/4 right-1/4 w-[500px] h-[500px] bg-purple-500/20 rounded-full blur-3xl parallax-medium"
 				/>
 			</div>
 

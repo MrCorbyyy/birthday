@@ -1,13 +1,18 @@
 import { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
+import { useParallax } from '../hooks/useParallax';
 
 const Message = () => {
 	const [isOpen, setIsOpen] = useState(false);
+	const parallaxBg = useParallax({ speed: 0.2 });
 
 	return (
 		<section className="min-h-screen py-24 flex items-center justify-center relative overflow-hidden bg-rose-100 perspective-1000">
-			{/* Background */}
-			<div className="absolute inset-0 bg-[url('https://www.transparenttextures.com/patterns/cubes.png')] opacity-10" />
+			{/* Background with Parallax */}
+			<div
+				ref={parallaxBg}
+				className="absolute inset-0 bg-[url('https://www.transparenttextures.com/patterns/cubes.png')] opacity-10 parallax-slow"
+			/>
 
 			<div className="relative z-10 w-full max-w-lg mx-auto h-[60vh] flex items-center justify-center">
 				<AnimatePresence>
