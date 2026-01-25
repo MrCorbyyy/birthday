@@ -9,25 +9,20 @@ import Countdown from './components/Countdown';
 import { Navigation } from './components/Navigation';
 import { MusicPlayer } from './components/MusicPlayer';
 import { AmbientParticles } from './components/AmbientParticles';
-import { useSmoothScroll } from './hooks/useSmoothScroll';
 
 function App() {
-	// Target date: February 14th, 2026 at 12:00 AM
 	const targetDate = '2026-02-14T00:00:00';
 
 	const [activeSection, setActiveSection] = useState('hero');
-	// Temporarily set to true for testing smooth scroll - change back to date check before Feb 14
 	// const [isUnlocked, setIsUnlocked] = useState(true);
 	const [isUnlocked, setIsUnlocked] = useState(() => {
 		return new Date() >= new Date(targetDate);
 	});
 
-	// Enable smooth scrolling only when unlocked
-	// Lower smoothness = slower, more cinematic scrolling (0.05 = very slow)
-	useSmoothScroll({
-		smoothness: 0.05,
-		enabled: isUnlocked,
-	});
+	// useSmoothScroll({
+	// 	smoothness: 0.1,
+	// 	enabled: isUnlocked,
+	// });
 
 	useEffect(() => {
 		const handleScroll = () => {
@@ -68,20 +63,7 @@ function App() {
 
 			<main className="w-full relative">
 				<AnimatePresence mode="wait">
-					{!isUnlocked ? (
-						<motion.div
-							key="countdown"
-							initial={{ opacity: 0 }}
-							animate={{ opacity: 1 }}
-							exit={{ opacity: 0 }}
-							transition={{ duration: 0.5 }}
-							className="min-h-screen flex items-center justify-center">
-							<Countdown
-								targetDate={targetDate}
-								onComplete={() => setIsUnlocked(true)}
-							/>
-						</motion.div>
-					) : (
+					{isUnlocked ? (
 						<motion.div
 							key="content"
 							initial={{ opacity: 0 }}
@@ -130,6 +112,19 @@ function App() {
 									))}
 								</div>
 							</footer>
+						</motion.div>
+					) : (
+						<motion.div
+							key="countdown"
+							initial={{ opacity: 0 }}
+							animate={{ opacity: 1 }}
+							exit={{ opacity: 0 }}
+							transition={{ duration: 0.5 }}
+							className="min-h-screen flex items-center justify-center">
+							<Countdown
+								targetDate={targetDate}
+								onComplete={() => setIsUnlocked(true)}
+							/>
 						</motion.div>
 					)}
 				</AnimatePresence>
