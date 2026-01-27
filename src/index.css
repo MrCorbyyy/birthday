@@ -48,11 +48,6 @@
 	box-sizing: border-box;
 }
 
-html {
-	/* Smooth scrolling will be handled by JavaScript for better control */
-	scroll-padding-top: 80px;
-}
-
 body {
 	font-family: 'Montserrat', sans-serif;
 	background: var(--gradient-soft);

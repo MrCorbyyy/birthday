@@ -98,7 +98,7 @@ const Gallery = () => {
 	const currentPhoto = photos[currentIndex];
 
 	return (
-		<section className="relative min-h-screen pt-10 pb-24 bg-gradient-to-br from-gray-900 via-rose-950 to-gray-900 overflow-hidden flex flex-col items-center justify-center">
+		<section className="relative h-screen pt-10 pb-24 bg-gradient-to-br from-gray-900 via-rose-950 to-gray-900 overflow-hidden flex flex-col items-center justify-center">
 			{/* Animated Background Gradient Orbs with Parallax */}
 			<div className="absolute inset-0 overflow-hidden pointer-events-none">
 				<motion.div

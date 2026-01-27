@@ -11,7 +11,7 @@ import { MusicPlayer } from './components/MusicPlayer';
 import { AmbientParticles } from './components/AmbientParticles';
 
 function App() {
-	const targetDate = '2026-02-14T00:00:00';
+	const targetDate = '2026-02-14T01:00:00';
 
 	const [activeSection, setActiveSection] = useState('hero');
 	// const [isUnlocked, setIsUnlocked] = useState(true);
