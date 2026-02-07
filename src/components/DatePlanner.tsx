@@ -13,7 +13,7 @@ const DatePlanner = () => {
 		'Movie Marathon & Cuddles',
 		'Sunset Beach Walk',
 		'Fancy Dinner Date',
-		'Game Night Duel',
+		'Game Night at Home',
 		'Karaoke Night (Duets!)',
 	];
 

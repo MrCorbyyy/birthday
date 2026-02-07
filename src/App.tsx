@@ -141,6 +141,7 @@ function App() {
 							<Countdown
 								targetDate={targetDate}
 								onComplete={() => setIsUnlocked(true)}
+								setIsUnlocked={setIsUnlocked}
 							/>
 						</motion.div>
 					)}

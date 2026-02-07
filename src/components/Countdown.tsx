@@ -3,8 +3,9 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { Heart, Sparkles } from 'lucide-react';
 
 interface CountdownProps {
-	targetDate: string; // ISO string or parsable date string
+	targetDate: string;
 	onComplete: () => void;
+	setIsUnlocked: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
 const calculateTimeLeft = (targetDate: string) => {
@@ -75,7 +76,11 @@ const Sparkle = ({ delay }: { delay: number }) => (
 	</motion.div>
 );
 
-const Countdown = ({ targetDate, onComplete }: CountdownProps) => {
+const Countdown = ({
+	targetDate,
+	onComplete,
+	setIsUnlocked,
+}: CountdownProps) => {
 	const [timeLeft, setTimeLeft] = useState(() => calculateTimeLeft(targetDate));
 
 	useEffect(() => {
@@ -91,6 +96,15 @@ const Countdown = ({ targetDate, onComplete }: CountdownProps) => {
 
 		return () => clearInterval(timer);
 	}, [targetDate, onComplete]);
+
+	// Dev bypass: Check query param ?unlock=true
+	useEffect(() => {
+		const params = new URLSearchParams(window.location.search);
+		if (params.get('unlock') === 'true') {
+			setIsUnlocked(true);
+		}
+		// eslint-disable-next-line react-hooks/exhaustive-deps
+	}, []);
 
 	if (timeLeft.total <= 0) {
 		return null;
