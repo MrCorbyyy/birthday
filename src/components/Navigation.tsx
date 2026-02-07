@@ -1,13 +1,12 @@
 import React from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Heart, Image, AlignLeft, Gift } from 'lucide-react';
+import { Heart, Image, AlignLeft, Gift, Mail, Disc } from 'lucide-react';
 
 interface NavigationProps {
 	activeSection: string;
 }
 
 export const Navigation: React.FC<NavigationProps> = ({ activeSection }) => {
-	// Navigation is always visible for easy access
 	const scrollToSection = (id: string) => {
 		const element = document.getElementById(id);
 		if (element) {
@@ -18,6 +17,8 @@ export const Navigation: React.FC<NavigationProps> = ({ activeSection }) => {
 	const navItems = [
 		{ id: 'hero', icon: Heart, label: 'Start' },
 		{ id: 'gallery', icon: Image, label: 'Memories' },
+		{ id: 'open-when', icon: Mail, label: 'Open When' },
+		{ id: 'date-planner', icon: Disc, label: 'Future' },
 		{ id: 'message', icon: AlignLeft, label: 'Dearest' },
 		{ id: 'proposal', icon: Gift, label: 'Forever' },
 	];

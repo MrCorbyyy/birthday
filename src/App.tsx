@@ -9,6 +9,8 @@ import Countdown from './components/Countdown';
 import { Navigation } from './components/Navigation';
 import { MusicPlayer } from './components/MusicPlayer';
 import { AmbientParticles } from './components/AmbientParticles';
+import OpenWhen from './components/OpenWhen';
+import DatePlanner from './components/DatePlanner';
 
 function App() {
 	const targetDate = '2026-02-14T01:00:00';
@@ -26,7 +28,14 @@ function App() {
 
 	useEffect(() => {
 		const handleScroll = () => {
-			const sections = ['hero', 'gallery', 'message', 'proposal'];
+			const sections = [
+				'hero',
+				'gallery',
+				'open-when',
+				'date-planner',
+				'message',
+				'proposal',
+			];
 			const scrollPosition = window.scrollY + window.innerHeight / 2;
 
 			for (const section of sections) {
@@ -80,6 +89,14 @@ function App() {
 
 							<div id="gallery">
 								<Gallery />
+							</div>
+
+							<div id="open-when">
+								<OpenWhen />
+							</div>
+
+							<div id="date-planner">
+								<DatePlanner />
 							</div>
 
 							<div id="message">

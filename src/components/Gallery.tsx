@@ -10,12 +10,7 @@ const photos = [
 		date: 'Always',
 		color: '#fda4af',
 	},
-	{
-		src: '/IMG_5531.PNG',
-		caption: 'Beautiful Moments',
-		date: 'Jan 23, 2026',
-		color: '#f9a8d4',
-	},
+
 	{
 		src: '/eb4bb98a-2db4-4c19-b87a-df10e6c29956.JPG',
 		caption: 'Stylist Time',
@@ -27,6 +22,49 @@ const photos = [
 		caption: 'My Beautiful Kemi',
 		date: 'Jan 1, 2026',
 		color: '#fca5a5',
+	},
+	{
+		src: '/camp-time.webp',
+		caption: 'Crazy Camp Times',
+		date: '4 Feb 2026',
+		color: '#fda4af',
+	},
+
+	{
+		src: '/outing.webp',
+		caption: 'Day Out',
+		date: 'Recent',
+		color: '#c4b5fd',
+	},
+	{
+		src: '/selfie-time.webp',
+		caption: 'Selfie Time',
+		date: 'Recent',
+		color: '#fca5a5',
+	},
+	{
+		src: '/talking-w-man.webp',
+		caption: 'Deep Conversations',
+		date: '7 Feb 2026',
+		color: '#fdba74',
+	},
+	{
+		src: '/talking-w-man-laf.webp',
+		caption: 'Laughting with my man',
+		date: '7 Feb 2026',
+		color: '#a5f3fc',
+	},
+	{
+		src: '/movie-night.webp',
+		caption: 'First Movie Night',
+		date: '16 Jan 2026',
+		color: '#f9a8d4',
+	},
+	{
+		src: '/IMG_5531.PNG',
+		caption: 'Beautiful Moments',
+		date: 'Jan 23, 2026',
+		color: '#f9a8d4',
 	},
 	{
 		src: '/me.JPEG',
