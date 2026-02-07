@@ -17,7 +17,7 @@ const letters = [
 		color: 'from-rose-400 to-pink-400',
 		icon: '🤗',
 		content:
-			"I miss you too! Probably even more. Close your eyes and imagine I'm giving you the biggest, warmest hug right now. We'll be together soon, and I'll make up for every second we're apart. Until then, look at our photos and remember how much I adore you.",
+			"I miss you too! Probably even more. Close your eyes and imagine I'm giving you the biggest, warmest hug right now. We'll be together soon, and I'll make up for every second we're apart. Until then, look at my photos and remember how much I adore you.",
 	},
 	{
 		id: 3,

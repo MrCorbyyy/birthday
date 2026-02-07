@@ -11,6 +11,20 @@ const Proposal = () => {
 	const [cinemaMode, setCinemaMode] = useState(false);
 	const noButtonRef = useRef<HTMLButtonElement>(null);
 	const containerRef = useRef<HTMLDivElement>(null);
+	const [isHoveringNo, setIsHoveringNo] = useState(false);
+
+	// Auto-cycle No messages on hover
+	useEffect(() => {
+		let interval: any;
+		if (isHoveringNo) {
+			// Increment immediately on hover, then every 600ms
+			setNoCount((prev) => prev + 1);
+			interval = setInterval(() => {
+				setNoCount((prev) => prev + 1);
+			}, 600);
+		}
+		return () => clearInterval(interval);
+	}, [isHoveringNo]);
 
 	// Cinema Mode Effect
 	useEffect(() => {
@@ -28,8 +42,11 @@ const Proposal = () => {
 	}, []);
 
 	const handleNoHover = () => {
-		// Just change the text, don't move the button
-		setNoCount(noCount + 1);
+		setIsHoveringNo(true);
+	};
+
+	const handleNoLeave = () => {
+		setIsHoveringNo(false);
 	};
 
 	const handleYesClick = () => {
@@ -99,7 +116,7 @@ const Proposal = () => {
 	};
 
 	const getHintMessage = () => {
-		if (noCount < 3) return null;
+		// if (noCount < 3) return null;
 
 		const hints = [
 			{ min: 3, max: 5, text: 'Hmm... interesting choice 🤔' },
@@ -290,6 +307,7 @@ const Proposal = () => {
 							<motion.button
 								ref={noButtonRef}
 								onMouseEnter={handleNoHover}
+								onMouseLeave={handleNoLeave}
 								whileHover={{ scale: 1.05 }}
 								className={`px-16 py-6 text-xl font-medium rounded-full transition-all duration-300 min-w-[240px] ${
 									cinemaMode

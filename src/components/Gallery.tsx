@@ -5,15 +5,8 @@ import { useParallax } from '../hooks/useParallax';
 
 const photos = [
 	{
-		src: '/IMG_5405.JPG',
-		caption: 'The First Spark',
-		date: 'Always',
-		color: '#fda4af',
-	},
-
-	{
 		src: '/eb4bb98a-2db4-4c19-b87a-df10e6c29956.JPG',
-		caption: 'Stylist Time',
+		caption: 'Fashion Killa',
 		date: 'Always',
 		color: '#c4b5fd',
 	},
@@ -23,6 +16,13 @@ const photos = [
 		date: 'Jan 1, 2026',
 		color: '#fca5a5',
 	},
+	{
+		src: '/IMG_5405.JPG',
+		caption: 'The First Spark',
+		date: 'Always',
+		color: '#fda4af',
+	},
+
 	{
 		src: '/camp-time.webp',
 		caption: 'Crazy Camp Times',
@@ -50,7 +50,7 @@ const photos = [
 	},
 	{
 		src: '/talking-w-man-laf.webp',
-		caption: 'Laughting with my man',
+		caption: 'Laughing with my man',
 		date: '7 Feb 2026',
 		color: '#a5f3fc',
 	},
