@@ -100,7 +100,7 @@ const Countdown = ({
 	// Dev bypass: Check query param ?unlock=true
 	useEffect(() => {
 		const params = new URLSearchParams(window.location.search);
-		if (params.get('unlock') === 'true') {
+		if (params.get('kemi') === 'true') {
 			setIsUnlocked(true);
 		}
 		// eslint-disable-next-line react-hooks/exhaustive-deps
