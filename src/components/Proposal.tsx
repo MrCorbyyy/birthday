@@ -116,7 +116,7 @@ const Proposal = () => {
 	};
 
 	const getHintMessage = () => {
-		// if (noCount < 3) return null;
+		if (noCount < 3) return null;
 
 		const hints = [
 			{ min: 3, max: 5, text: 'Hmm... interesting choice 🤔' },
