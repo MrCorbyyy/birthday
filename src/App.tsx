@@ -14,7 +14,7 @@ import DatePlanner from './components/DatePlanner';
 import VideoReveal from './components/VideoReveal';
 
 function App() {
-	const targetDate = '2026-02-14T01:00:00';
+	const targetDate = '2026-02-12T01:00:00';
 
 	const [activeSection, setActiveSection] = useState('hero');
 	// const [isUnlocked, setIsUnlocked] = useState(true);
