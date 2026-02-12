@@ -7,10 +7,11 @@ import Message from './components/Message';
 import Proposal from './components/Proposal';
 import Countdown from './components/Countdown';
 import { Navigation } from './components/Navigation';
-import { MusicPlayer } from './components/MusicPlayer';
+// import { MusicPlayer } from './components/MusicPlayer';
 import { AmbientParticles } from './components/AmbientParticles';
 import OpenWhen from './components/OpenWhen';
 import DatePlanner from './components/DatePlanner';
+import VideoReveal from './components/VideoReveal';
 
 function App() {
 	const targetDate = '2026-02-14T01:00:00';
@@ -34,6 +35,7 @@ function App() {
 				'open-when',
 				'date-planner',
 				'message',
+				'video-reveal',
 				'proposal',
 			];
 			const scrollPosition = window.scrollY + window.innerHeight / 2;
@@ -80,7 +82,7 @@ function App() {
 							exit={{ opacity: 0 }}
 							transition={{ duration: 1 }}>
 							<AmbientParticles />
-							<MusicPlayer />
+							{/* <MusicPlayer /> */}
 							<Navigation activeSection={activeSection} />
 
 							<div id="hero">
@@ -101,6 +103,10 @@ function App() {
 
 							<div id="message">
 								<Message />
+							</div>
+
+							<div id="video-reveal">
+								<VideoReveal />
 							</div>
 
 							<div id="proposal">

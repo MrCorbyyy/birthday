@@ -67,6 +67,12 @@ const photos = [
 		color: '#f9a8d4',
 	},
 	{
+		src: '/sleepy.webp',
+		caption: 'Sleepy Kemi',
+		date: 'Always',
+		color: '#f9a8d4',
+	},
+	{
 		src: '/me.JPEG',
 		caption: 'Hi!  Gillette',
 		date: 'Feb 19, 2025',
