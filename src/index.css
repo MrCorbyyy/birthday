@@ -5,6 +5,16 @@
 @source '../node_modules/@heroui/theme/dist/**/*.{js,ts,jsx,tsx}';
 @custom-variant dark (&:is(.dark *));
 
+@theme {
+	/* These generate the font-script / font-display / font-handwriting utilities
+	   used across components (they were previously unset, so those classes were
+	   silently no-ops falling back to the body font). */
+	--font-script: 'Great Vibes', cursive;
+	--font-great-vibes: 'Great Vibes', cursive;
+	--font-handwriting: 'Great Vibes', cursive;
+	--font-display: 'Playfair Display', serif;
+}
+
 :root {
 	/* Simple Color Palette */
 	--color-romantic-red: #e11d48;
