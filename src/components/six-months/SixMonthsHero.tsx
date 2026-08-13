@@ -61,16 +61,15 @@ const SixMonthsHero = () => {
 				transition={{ duration: 1 }}
 				className="relative z-10 text-center max-w-3xl">
 				<span className="inline-block text-sm uppercase tracking-[0.4em] text-romantic-red font-semibold mb-6">
-					182 days ago, I asked
+					181 days ago, I asked
 				</span>
-
 				<h1 className="font-script text-6xl md:text-8xl lg:text-9xl text-romantic-red leading-none mb-4">
 					Half a Year of Us
 				</h1>
 
 				<p className="text-gray-600 text-lg md:text-xl font-light max-w-xl mx-auto leading-relaxed mb-14">
-					You said yes. Here's everything that's happened since — the good,
-					the silly, the "we turned bowling into a rivalry" kind of good.
+					You said yes. Here's everything that's happened since — the good, the
+					silly, the "we turned bowling into a rivalry" kind of good.
 				</p>
 
 				{/* Live time-together counter */}
@@ -104,7 +103,9 @@ const SixMonthsHero = () => {
 					<span className="text-gray-700 uppercase tracking-[0.25em] text-sm font-semibold group-hover:text-romantic-red transition-colors">
 						See how far we've come
 					</span>
-					<motion.div animate={{ y: [0, 5, 0] }} transition={{ duration: 1.5, repeat: Infinity }}>
+					<motion.div
+						animate={{ y: [0, 5, 0] }}
+						transition={{ duration: 1.5, repeat: Infinity }}>
 						<ChevronDown className="w-5 h-5 text-romantic-red" />
 					</motion.div>
 				</motion.button>
