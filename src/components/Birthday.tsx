@@ -1,6 +1,8 @@
 import { useEffect, useRef, useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Clock, Sparkles } from 'lucide-react';
+import { Clock, Sparkles, Gift, Lock } from 'lucide-react';
+import confetti from 'canvas-confetti';
+
 
 interface TimeRemaining {
 	days: number;
@@ -151,6 +153,19 @@ const Birthday = () => {
 	const [prayerIndex, setPrayerIndex] = useState(0);
 	const timerRef = useRef<ReturnType<typeof setInterval> | null>(null);
 	const [timeLeft, setTimeLeft] = useState<TimeRemaining>(calculateTimeLeft());
+	const [isUnlocked, setIsUnlocked] = useState(false);
+
+	const handleUnlock = () => {
+		if (!timeLeft.isPast) return;
+		confetti({
+			particleCount: 160,
+			spread: 100,
+			origin: { y: 0.6 },
+			colors: ['#fda4af', '#fb7185', '#e11d48', '#f43f5e', '#ffffff', '#fbbf24'],
+		});
+		setIsUnlocked(true);
+	};
+
 
 	useEffect(() => {
 		const timer = setInterval(() => {
@@ -158,6 +173,8 @@ const Birthday = () => {
 		}, 1000);
 		return () => clearInterval(timer);
 	}, []);
+
+
 
 
 	useEffect(() => {
@@ -284,140 +301,200 @@ const Birthday = () => {
 				</motion.div>
 
 
-				{/* Candles */}
-				<motion.div
-					initial={{ opacity: 0 }}
-					whileInView={{ opacity: 1 }}
-					viewport={{ once: true }}
-					transition={{ delay: 0.4 }}
-					className="flex justify-center gap-4 mb-10">
-					{candles.map((_, i) => (
-						<BirthdayCandle key={i} delay={0.5 + i * 0.1} />
-					))}
-				</motion.div>
-				<motion.p
-					initial={{ opacity: 0 }}
-					whileInView={{ opacity: 1 }}
-					viewport={{ once: true }}
-					transition={{ delay: 1.2 }}
-					className="text-rose-300/60 text-xs italic mb-12">
-					(tap a candle to blow it out 🎂)
-				</motion.p>
-
-				{/* Main message card */}
-				<motion.div
-					initial={{ opacity: 0, y: 40 }}
-					whileInView={{ opacity: 1, y: 0 }}
-					viewport={{ once: true }}
-					transition={{ delay: 0.6, duration: 0.8 }}
-					className="bg-white/5 backdrop-blur-xl border border-white/10 rounded-3xl p-8 md:p-12 mb-8 shadow-2xl text-left">
-
-					<div className="space-y-5 text-white/90 font-display text-lg md:text-xl leading-relaxed">
-						<p>
-							<span className="text-5xl text-rose-300 font-script float-left mr-3 mt-[-8px]">A</span>
-							seye, where do I even begin? The universe did something truly special when it decided
-							to bring you into this world on September 21st.
-						</p>
-						<p>
-							You are the kind of person who makes ordinary moments feel like something out of a
-							movie the way you laugh, the way you think, the way you show up. Every day with
-							you in my world is a gift I don't take for granted.
-						</p>
-						<p>
-							On this day, I don't just want to say <em className="text-rose-300">"Happy Birthday"</em> and move on.
-							I want you to feel it deep in your chest how loved you are. How seen you are.
-							How much light you carry without even knowing it.
-						</p>
-						<p>
-							Here's to you, Aseye. Here's to everything you are, everything you're becoming,
-							and everything we're building together. 🥂
-						</p>
-					</div>
-				</motion.div>
-
-				{/* Prayer section */}
-				<motion.div
-					initial={{ opacity: 0, y: 40 }}
-					whileInView={{ opacity: 1, y: 0 }}
-					viewport={{ once: true }}
-					transition={{ delay: 0.8, duration: 0.8 }}
-					className="mb-8">
-					<button
-						onClick={() => setRevealed(true)}
-						className={`${revealed ? 'hidden' : 'inline-flex'} items-center gap-3 px-8 py-4 bg-gradient-to-r from-rose-500 to-pink-500 text-white rounded-full font-semibold tracking-wide shadow-xl hover:shadow-rose-500/40 hover:scale-105 transition-all duration-300`}>
-						<span>🙏</span> Open a Prayer for You
-					</button>
-
-					<AnimatePresence>
-						{revealed && (
-							<motion.div
-								initial={{ opacity: 0, scale: 0.9 }}
-								animate={{ opacity: 1, scale: 1 }}
-								className="bg-gradient-to-br from-purple-900/50 to-rose-900/50 backdrop-blur-xl border border-white/10 rounded-3xl p-8 md:p-10 shadow-2xl">
-								<div className="text-4xl mb-6">🙏</div>
-								<p className="text-rose-200 text-sm uppercase tracking-[0.3em] mb-4">
-									A Prayer For You
-								</p>
-								<AnimatePresence mode="wait">
-									<motion.p
-										key={prayerIndex}
-										initial={{ opacity: 0, y: 10 }}
-										animate={{ opacity: 1, y: 0 }}
-										exit={{ opacity: 0, y: -10 }}
-										transition={{ duration: 0.6 }}
-										className="font-display text-xl md:text-2xl text-white/90 leading-relaxed italic">
-										"{prayers[prayerIndex]}"
-									</motion.p>
-								</AnimatePresence>
-								<div className="flex justify-center gap-2 mt-6">
-									{prayers.map((_, i) => (
-										<button
-											key={i}
-											onClick={() => setPrayerIndex(i)}
-											className={`w-2 h-2 rounded-full transition-all duration-300 ${
-												i === prayerIndex ? 'bg-rose-400 w-6' : 'bg-white/30'
-											}`}
-										/>
-									))}
-								</div>
-							</motion.div>
-						)}
-					</AnimatePresence>
-				</motion.div>
-
-				{/* Together message */}
-				<motion.div
-					initial={{ opacity: 0, y: 30 }}
-					whileInView={{ opacity: 1, y: 0 }}
-					viewport={{ once: true }}
-					transition={{ delay: 1, duration: 0.8 }}
-					className="bg-white/5 backdrop-blur-xl border border-rose-400/20 rounded-3xl p-8 shadow-2xl">
+				{timeLeft.isPast && isUnlocked ? (
 					<motion.div
-						animate={{ rotate: [0, 10, -10, 0], scale: [1, 1.1, 1] }}
-						transition={{ duration: 3, repeat: Infinity }}
-						className="text-5xl mb-4">
-						💞
+						initial={{ opacity: 0, y: 30 }}
+						animate={{ opacity: 1, y: 0 }}
+						transition={{ duration: 0.8 }}>
+
+						{/* Candles */}
+						<motion.div
+							initial={{ opacity: 0 }}
+							animate={{ opacity: 1 }}
+							transition={{ delay: 0.2 }}
+							className="flex justify-center gap-4 mb-10">
+							{candles.map((_, i) => (
+								<BirthdayCandle key={i} delay={0.5 + i * 0.1} />
+							))}
+						</motion.div>
+						<motion.p
+							initial={{ opacity: 0 }}
+							whileInView={{ opacity: 1 }}
+							viewport={{ once: true }}
+							transition={{ delay: 1.2 }}
+							className="text-rose-300/60 text-xs italic mb-12">
+							(tap a candle to blow it out 🎂)
+						</motion.p>
+
+						{/* Main message card */}
+						<motion.div
+							initial={{ opacity: 0, y: 40 }}
+							whileInView={{ opacity: 1, y: 0 }}
+							viewport={{ once: true }}
+							transition={{ delay: 0.6, duration: 0.8 }}
+							className="bg-white/5 backdrop-blur-xl border border-white/10 rounded-3xl p-8 md:p-12 mb-8 shadow-2xl text-left">
+							<div className="space-y-5 text-white/90 font-display text-lg md:text-xl leading-relaxed">
+								<p>
+									<span className="text-5xl text-rose-300 font-script float-left mr-3 mt-[-8px]">A</span>
+									seye, where do I even begin? The universe did something truly special when it decided
+									to bring you into this world on September 21st.
+								</p>
+								<p>
+									You are the kind of person who makes ordinary moments feel like something out of a
+									movie the way you laugh, the way you think, the way you show up. Every day with
+									you in my world is a gift I don't take for granted.
+								</p>
+								<p>
+									On this day, I don't just want to say <em className="text-rose-300">"Happy Birthday"</em> and move on.
+									I want you to feel it deep in your chest how loved you are. How seen you are.
+									How much light you carry without even knowing it.
+								</p>
+								<p>
+									Here's to you, Aseye. Here's to everything you are, everything you're becoming,
+									and everything we're building together. 🥂
+								</p>
+							</div>
+						</motion.div>
+
+						{/* Prayer section */}
+						<motion.div
+							initial={{ opacity: 0, y: 40 }}
+							whileInView={{ opacity: 1, y: 0 }}
+							viewport={{ once: true }}
+							transition={{ delay: 0.8, duration: 0.8 }}
+							className="mb-8">
+							<button
+								onClick={() => setRevealed(true)}
+								className={`${revealed ? 'hidden' : 'inline-flex'} items-center gap-3 px-8 py-4 bg-gradient-to-r from-rose-500 to-pink-500 text-white rounded-full font-semibold tracking-wide shadow-xl hover:shadow-rose-500/40 hover:scale-105 transition-all duration-300`}>
+								<span>🙏</span> Open a Prayer for You
+							</button>
+
+							<AnimatePresence>
+								{revealed && (
+									<motion.div
+										initial={{ opacity: 0, scale: 0.9 }}
+										animate={{ opacity: 1, scale: 1 }}
+										className="bg-gradient-to-br from-purple-900/50 to-rose-900/50 backdrop-blur-xl border border-white/10 rounded-3xl p-8 md:p-10 shadow-2xl">
+										<div className="text-4xl mb-6">🙏</div>
+										<p className="text-rose-200 text-sm uppercase tracking-[0.3em] mb-4">
+											A Prayer For You
+										</p>
+										<AnimatePresence mode="wait">
+											<motion.p
+												key={prayerIndex}
+												initial={{ opacity: 0, y: 10 }}
+												animate={{ opacity: 1, y: 0 }}
+												exit={{ opacity: 0, y: -10 }}
+												transition={{ duration: 0.6 }}
+												className="font-display text-xl md:text-2xl text-white/90 leading-relaxed italic">
+												"{prayers[prayerIndex]}"
+											</motion.p>
+										</AnimatePresence>
+										<div className="flex justify-center gap-2 mt-6">
+											{prayers.map((_, i) => (
+												<button
+													key={i}
+													onClick={() => setPrayerIndex(i)}
+													className={`w-2 h-2 rounded-full transition-all duration-300 ${
+														i === prayerIndex ? 'bg-rose-400 w-6' : 'bg-white/30'
+													}`}
+												/>
+											))}
+										</div>
+									</motion.div>
+								)}
+							</AnimatePresence>
+						</motion.div>
+
+						{/* Together message */}
+						<motion.div
+							initial={{ opacity: 0, y: 30 }}
+							whileInView={{ opacity: 1, y: 0 }}
+							viewport={{ once: true }}
+							transition={{ delay: 1, duration: 0.8 }}
+							className="bg-white/5 backdrop-blur-xl border border-rose-400/20 rounded-3xl p-8 shadow-2xl">
+							<motion.div
+								animate={{ rotate: [0, 10, -10, 0], scale: [1, 1.1, 1] }}
+								transition={{ duration: 3, repeat: Infinity }}
+								className="text-5xl mb-4">
+								💞
+							</motion.div>
+							<p className="font-display text-xl md:text-2xl text-white/90 leading-relaxed mb-4">
+								And as for us — I pray we continue to grow, to laugh, to choose each other every single day.
+							</p>
+							<p className="font-display text-lg text-rose-300 leading-relaxed">
+								This birthday is just the beginning of another beautiful chapter.
+								I want to be there for all of them.
+							</p>
+							<motion.p
+								animate={{
+									textShadow: [
+										'0 0 10px rgba(251, 113, 133, 0)',
+										'0 0 30px rgba(251, 113, 133, 0.5)',
+										'0 0 10px rgba(251, 113, 133, 0)',
+									],
+								}}
+								transition={{ duration: 2.5, repeat: Infinity }}
+								className="font-script text-4xl text-rose-300 mt-6">
+								With all my heart, Charddy 🌹
+							</motion.p>
+						</motion.div>
 					</motion.div>
-					<p className="font-display text-xl md:text-2xl text-white/90 leading-relaxed mb-4">
-						And as for us — I pray we continue to grow, to laugh, to choose each other every single day.
-					</p>
-					<p className="font-display text-lg text-rose-300 leading-relaxed">
-						This birthday is just the beginning of another beautiful chapter.
-						I want to be there for all of them.
-					</p>
-					<motion.p
-						animate={{
-							textShadow: [
-								'0 0 10px rgba(251, 113, 133, 0)',
-								'0 0 30px rgba(251, 113, 133, 0.5)',
-								'0 0 10px rgba(251, 113, 133, 0)',
-							],
-						}}
-						transition={{ duration: 2.5, repeat: Infinity }}
-						className="font-script text-4xl text-rose-300 mt-6">
-						With all my heart, Charddy 🌹
-					</motion.p>
-				</motion.div>
+				) : (
+					/* Locked state until countdown reaches birthday */
+					<motion.div
+						initial={{ opacity: 0, y: 20 }}
+						animate={{ opacity: 1, y: 0 }}
+						transition={{ duration: 0.6 }}
+						className="bg-white/5 backdrop-blur-xl border border-rose-300/20 rounded-3xl p-8 md:p-10 max-w-xl mx-auto text-center shadow-2xl">
+						{timeLeft.isPast ? (
+							/* Countdown has reached her birthday! She can now tap to unlock */
+							<div>
+								<motion.div
+									animate={{
+										scale: [1, 1.15, 1],
+										rotate: [0, -8, 8, 0],
+									}}
+									transition={{ repeat: Infinity, duration: 2.2 }}
+									className="w-24 h-24 mx-auto rounded-full bg-gradient-to-tr from-rose-500 to-pink-500 border-2 border-rose-300/60 flex items-center justify-center text-5xl mb-6 shadow-xl shadow-rose-500/40 cursor-pointer"
+									onClick={handleUnlock}>
+									🎁
+								</motion.div>
+								<h3 className="font-display text-3xl md:text-4xl text-white mb-3">
+									It's Your Birthday! 🎉
+								</h3>
+								<p className="text-rose-200/90 font-light text-lg md:text-xl leading-relaxed mb-6">
+									The wait is over! Your birthday candles, heartfelt letter, and prayers are waiting.
+								</p>
+								<motion.button
+									whileHover={{ scale: 1.06 }}
+									whileTap={{ scale: 0.95 }}
+									onClick={handleUnlock}
+									className="inline-flex items-center gap-3 px-8 sm:px-10 py-5 bg-gradient-to-r from-rose-500 via-pink-500 to-rose-600 text-white font-bold text-lg rounded-full shadow-2xl shadow-rose-500/50 hover:shadow-rose-500/80 transition-all cursor-pointer">
+									<Gift className="w-6 h-6" />
+									<span>Tap to Unlock Your Birthday Surprise</span>
+									<Sparkles className="w-5 h-5 text-amber-300 animate-pulse" />
+								</motion.button>
+							</div>
+						) : (
+							/* Countdown still ticking down */
+							<div>
+								<div className="w-16 h-16 mx-auto rounded-full bg-rose-500/20 border border-rose-400/30 flex items-center justify-center text-3xl mb-4">
+									<Lock className="w-7 h-7 text-rose-300" />
+								</div>
+								<h3 className="font-display text-2xl md:text-3xl text-white mb-3">
+									Birthday Message Locked
+								</h3>
+								<p className="text-rose-200/80 font-light text-base md:text-lg leading-relaxed mb-4">
+									The birthday candles, love letter, and special prayers will unlock right here as soon as the countdown hits midnight on September 21st!
+								</p>
+								<p className="text-rose-300/60 text-xs italic">
+									Counting down every second for you, Aseye ❤️
+								</p>
+							</div>
+						)}
+					</motion.div>
+				)}
 			</div>
 		</section>
 	);

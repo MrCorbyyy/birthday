@@ -4,6 +4,7 @@ import { motion } from 'framer-motion';
 import Hero from './components/Hero';
 import Gallery from './components/Gallery';
 import Message from './components/Message';
+import OpenWhen from './components/OpenWhen';
 import Birthday from './components/Birthday';
 import Proposal from './components/Proposal';
 import { Navigation } from './components/Navigation';
@@ -14,7 +15,14 @@ function App() {
 
 	useEffect(() => {
 		const handleScroll = () => {
-			const sections = ['hero', 'gallery', 'message', 'birthday', 'proposal'];
+			const sections = [
+				'hero',
+				'gallery',
+				'message',
+				'openwhen',
+				'birthday',
+				'proposal',
+			];
 			const scrollPosition = window.scrollY + window.innerHeight / 2;
 
 			for (const section of sections) {
@@ -67,6 +75,10 @@ function App() {
 
 					<div id="message">
 						<Message />
+					</div>
+
+					<div id="openwhen">
+						<OpenWhen />
 					</div>
 
 					<div id="birthday">

@@ -29,11 +29,11 @@ const letters = [
 	},
 	{
 		id: 4,
-		title: 'Open on our 1st Anniversary',
+		title: 'Open on your Birthday',
 		color: 'from-purple-400 to-violet-400',
-		icon: '🎉',
+		icon: '🎂',
 		content:
-			"Happy Anniversary baby! Can you believe it's been a whole year? 365 days of loving you, laughing with you, and building memories. You are the best thing that ever happened to me. Here's to a lifetime more of us. I love you!",
+			"Happy Birthday my beautiful Aseye! Today is all about celebrating the wonderful gift of you. May this new year of your life bring you endless joy, peace, and all the love in the world. I'm so blessed to have you in my life. With all my love, Charddy. ❤️",
 	},
 	{
 		id: 5,
