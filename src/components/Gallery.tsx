@@ -73,7 +73,7 @@ const photos = [
 		color: '#f9a8d4',
 	},
 	{
-		src: 'public/6-mnth-anniv/game.jpeg',
+		src: '/6-mnth-anniv/game.jpeg',
 		caption: 'Game Night',
 		date: 'Feb 19, 2025',
 		color: '#fdba74',
@@ -85,7 +85,7 @@ const photos = [
 		color: '#a5f3fc',
 	},
 	{
-		src: 'public/6-mnth-anniv/face.jpeg',
+		src: '/6-mnth-anniv/face.jpeg',
 		caption: 'The Face i feel in Love With',
 		date: 'Sept 23, 2025',
 		color: '#d8b4fe',
