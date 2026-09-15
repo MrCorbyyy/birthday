@@ -62,7 +62,7 @@ const photos = [
 	},
 	{
 		src: '/6-mnth-anniv/icee.jpeg',
-		caption: 'Icream Fight Date',
+		caption: 'Ice Cream Fight Date',
 		date: 'June 18, 2026',
 		color: '#f9a8d4',
 	},
@@ -86,7 +86,7 @@ const photos = [
 	},
 	{
 		src: '/6-mnth-anniv/face.jpeg',
-		caption: 'The Face i feel in Love With',
+		caption: 'The Face i fell in Love With',
 		date: 'Sept 23, 2025',
 		color: '#d8b4fe',
 	},
