@@ -1,6 +1,6 @@
 import React from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Heart, Image, AlignLeft, Gift, Mail, Disc } from 'lucide-react';
+import { Heart, Image, AlignLeft, Gift, Cake } from 'lucide-react';
 
 interface NavigationProps {
 	activeSection: string;
@@ -17,9 +17,8 @@ export const Navigation: React.FC<NavigationProps> = ({ activeSection }) => {
 	const navItems = [
 		{ id: 'hero', icon: Heart, label: 'Start' },
 		{ id: 'gallery', icon: Image, label: 'Memories' },
-		{ id: 'open-when', icon: Mail, label: 'Open When' },
-		{ id: 'date-planner', icon: Disc, label: 'Future' },
 		{ id: 'message', icon: AlignLeft, label: 'Dearest' },
+		{ id: 'birthday', icon: Cake, label: 'Birthday' },
 		{ id: 'proposal', icon: Gift, label: 'Forever' },
 	];
 

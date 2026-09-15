@@ -140,7 +140,7 @@ const Proposal = () => {
 			{
 				min: 21,
 				max: 999,
-				text: 'No is not an option, Kemi. It never was. 💖',
+				text: 'No is not an option, Aseye. It never was. 💖',
 			},
 		];
 
@@ -216,9 +216,24 @@ const Proposal = () => {
 							initial={{ opacity: 0 }}
 							animate={{ opacity: 1 }}
 							transition={{ delay: 0.5 }}
-							className="font-display text-2xl md:text-3xl text-rose-200 max-w-2xl mx-auto">
-							This is just the beginning of our story together, Kemi. ❤️
+							className="font-display text-2xl md:text-3xl text-rose-200 max-w-2xl mx-auto mb-8">
+							This is just the beginning of our story together, Aseye. ❤️
 						</motion.p>
+
+						<motion.div
+							initial={{ opacity: 0, y: 15 }}
+							animate={{ opacity: 1, y: 0 }}
+							transition={{ delay: 1 }}
+							className="relative z-20 flex flex-wrap justify-center gap-4">
+							<a
+								href="https://wa.me/233509829682?text=I%20said%20YES!%20%F0%9F%92%95%F0%9F%8E%89"
+								target="_blank"
+								rel="noopener noreferrer"
+								className="inline-flex items-center gap-2 px-8 py-4 bg-emerald-600 hover:bg-emerald-500 text-white font-semibold rounded-full shadow-lg transition-all duration-300 hover:scale-105">
+								<span>Tell Charddy on WhatsApp</span>
+								<span>💬</span>
+							</a>
+						</motion.div>
 
 						{/* Floating Hearts */}
 						<div className="absolute inset-0 pointer-events-none">
@@ -284,7 +299,7 @@ const Proposal = () => {
 								className={`font-display text-3xl md:text-6xl leading-tight transition-colors duration-1000 ${
 									cinemaMode ? 'text-white' : 'text-gray-800'
 								}`}>
-								Kemi, will you be my girlfriend?
+								Aseye, will you be my girlfriend?
 							</h2>
 						</motion.div>
 

@@ -67,7 +67,7 @@ export const MusicPlayer = () => {
 					<VolumeX className="w-4 h-4" />
 				)}
 				<span className="text-xs font-medium uppercase tracking-widest hidden md:inline-block">
-					{isPlaying ? 'Hey Kemi' : 'Play Music'}
+					{isPlaying ? 'Hey Ursie' : 'Play Music'}
 				</span>
 			</motion.button>
 		</div>

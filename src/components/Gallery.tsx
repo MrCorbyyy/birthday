@@ -5,89 +5,89 @@ import { useParallax } from '../hooks/useParallax';
 
 const photos = [
 	{
-		src: '/eb4bb98a-2db4-4c19-b87a-df10e6c29956.JPG',
-		caption: 'Fashion Killa',
+		src: '/6-mnth-anniv/my aseye.jpeg',
+		caption: 'My Chula',
 		date: 'Always',
 		color: '#c4b5fd',
 	},
 	{
-		src: '/kemi.JPG',
-		caption: 'My Beautiful Kemi',
-		date: 'Jan 1, 2026',
+		src: '/6-mnth-anniv/u and i.jpeg',
+		caption: 'Our First Pizza Date',
+		date: 'June 15, 2026',
 		color: '#fca5a5',
 	},
 	{
-		src: '/IMG_5405.JPG',
-		caption: 'The First Spark',
-		date: 'Always',
+		src: '/6-mnth-anniv/feeling.jpeg',
+		caption: 'Our First Selfie of the year',
+		date: 'Feb 16, 2026',
 		color: '#fda4af',
 	},
 
 	{
-		src: '/camp-time.webp',
-		caption: 'Crazy Camp Times',
-		date: '4 Feb 2026',
+		src: '/6-mnth-anniv/necklace.jpeg',
+		caption: 'A gift from the Heart',
+		date: 'Sep 4, 2026',
 		color: '#fda4af',
 	},
 
 	{
-		src: '/outing.webp',
-		caption: 'Day Out',
+		src: '/6-mnth-anniv/ice cream.jpeg',
+		caption: 'Hangout Out',
 		date: 'Recent',
 		color: '#c4b5fd',
 	},
 	{
-		src: '/selfie-time.webp',
-		caption: 'Selfie Time',
-		date: 'Recent',
+		src: '/6-mnth-anniv/us.jpeg',
+		caption: 'Randoms',
+		date: 'Jun 15, 2026',
 		color: '#fca5a5',
 	},
 	{
-		src: '/talking-w-man.webp',
-		caption: 'Deep Conversations',
-		date: '7 Feb 2026',
+		src: '/6-mnth-anniv/vc.jpeg',
+		caption: 'Morning Video Call',
+		date: 'July 7, 2026',
 		color: '#fdba74',
 	},
 	{
-		src: '/talking-w-man-laf.webp',
-		caption: 'Laughing with my man',
-		date: '7 Feb 2026',
+		src: '/6-mnth-anniv/cut.jpeg',
+		caption: 'Our First Cut Together',
+		date: 'August 11 2026',
 		color: '#a5f3fc',
 	},
 	{
-		src: '/movie-night.webp',
-		caption: 'First Movie Night',
-		date: '16 Jan 2026',
+		src: '/6-mnth-anniv/randoms.jpeg',
+		caption: 'late Night Randoms',
+		date: 'August 23 2026',
 		color: '#f9a8d4',
 	},
 	{
-		src: '/IMG_5531.PNG',
-		caption: 'Beautiful Moments',
-		date: 'Jan 23, 2026',
+		src: '/6-mnth-anniv/icee.jpeg',
+		caption: 'Icream Fight Date',
+		date: 'June 18, 2026',
 		color: '#f9a8d4',
 	},
 	{
-		src: '/sleepy.webp',
-		caption: 'Sleepy Kemi',
+		src: '/6-mnth-anniv/14th.jpeg',
+		caption: '16th of February',
 		date: 'Always',
 		color: '#f9a8d4',
 	},
 	{
-		src: '/me.JPEG',
-		caption: 'Hi!  Gillette',
+		src: 'public/6-mnth-anniv/game.jpeg',
+		caption: 'Game Night',
 		date: 'Feb 19, 2025',
 		color: '#fdba74',
 	},
 	{
-		src: '/me3.JPG',
-		caption: 'Turtle Time',
+		src: '/6-mnth-anniv/charddy.jpeg',
+		caption: 'Hi! Charddy',
 		date: 'Always',
 		color: '#a5f3fc',
 	},
 	{
-		src: '/me4.JPG',
-		caption: 'Suit Up',
-		date: 'Jan 5, 2026',
+		src: 'public/6-mnth-anniv/face.jpeg',
+		caption: 'The Face i feel in Love With',
+		date: 'Sept 23, 2025',
 		color: '#d8b4fe',
 	},
 ];
@@ -97,7 +97,6 @@ const Gallery = () => {
 	const [direction, setDirection] = useState(0);
 	const [isZoomed, setIsZoomed] = useState(false);
 
-	// Parallax refs for background elements
 	const parallaxOrb1 = useParallax({ speed: 0.3 });
 	const parallaxOrb2 = useParallax({ speed: 0.5 });
 
@@ -165,7 +164,7 @@ const Gallery = () => {
 				/>
 			</div>
 
-			{/* Header */}
+			
 			<motion.div
 				initial={{ opacity: 0, y: -30 }}
 				whileInView={{ opacity: 1, y: 0 }}
@@ -275,7 +274,7 @@ const Gallery = () => {
 				</AnimatePresence>
 			</div>
 
-			{/* Progress Indicators */}
+			
 			<div className="flex gap-3 mt-12 z-10">
 				{photos.map((_, index) => (
 					<button

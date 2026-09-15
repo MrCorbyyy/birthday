@@ -4,6 +4,7 @@ import { useEffect, useState } from 'react';
 interface Particle {
 	id: number;
 	x: number;
+	
 	delay: number;
 	duration: number;
 	size: number;

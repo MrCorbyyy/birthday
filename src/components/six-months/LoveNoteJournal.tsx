@@ -57,7 +57,7 @@ const LoveNoteJournal = () => {
 							</motion.div>
 
 							<span className="text-romantic-red text-xs font-bold tracking-[0.3em] uppercase opacity-60">
-								Dear Kemi
+								Dear Ursie
 							</span>
 
 							<div className="mt-6 font-display text-base md:text-lg leading-relaxed text-gray-800 space-y-4">

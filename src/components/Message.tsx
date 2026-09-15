@@ -25,18 +25,18 @@ const Message = () => {
 							onClick={() => setIsOpen(true)}
 							className="relative cursor-pointer group"
 							style={{ transformStyle: 'preserve-3d' }}>
-							{/* Envelope Back */}
+
 							<div className="w-[300px] h-[200px] bg-rose-200 shadow-2xl rounded-b-lg relative z-0" />
 
-							{/* Envelope Flap (Closed) */}
+							
 							<div className="absolute top-0 left-0 w-full h-full z-20 origin-top transition-transform duration-500 group-hover:rotate-x-180">
 								<div className="border-t-[100px] border-t-rose-300 border-l-[150px] border-l-transparent border-r-[150px] border-r-transparent h-0 w-0 filter drop-shadow-md" />
 							</div>
 
-							{/* Wax Seal */}
+							
 							<div className="absolute top-[40%] left-1/2 -translate-x-1/2 z-30 w-12 h-12 bg-romantic-red rounded-full flex items-center justify-center shadow-lg group-hover:scale-110 transition-transform duration-300">
 								<span className="font-great-vibes text-white text-xl font-bold">
-									K
+									A
 								</span>
 							</div>
 
@@ -78,9 +78,9 @@ const Message = () => {
 							<div className="font-display text-lg md:text-xl leading-relaxed text-gray-800 space-y-6">
 								<p>
 									<span className="text-5xl text-romantic-red font-romantic float-left mr-3 mt-[-10px] opacity-80">
-										K
+										A
 									</span>
-									emi,
+									seye,
 								</p>
 								<p>
 									I never believed in perfect timing until I met you. Every
@@ -103,7 +103,7 @@ const Message = () => {
 								<p className="font-romantic text-3xl text-romantic-red transform -rotate-2">
 									With all my heart,
 									<br />
-									<span className="text-4xl ml-4">Gillette</span>
+									<span className="text-4xl ml-4">Charddy</span>
 								</p>
 							</div>
 

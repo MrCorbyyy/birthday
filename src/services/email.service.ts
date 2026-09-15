@@ -1,39 +1,65 @@
-import emailjs from '@emailjs/browser';
 
-const SERVICE_ID = 'service_yytzizk';
-const TEMPLATE_ID = 'template_e4eqpnx';
-const PUBLIC_KEY = 'QYfwdZPzInxarW3tY';
+const RECIPIENT_EMAIL = 'corby12rich@gmail.com';
 
 export const sendResponse = async (answer: string) => {
 	try {
-		const templateParams = {
-			answer: answer,
-			to_name: 'Gillette',
-			message: `She said ${answer}!`,
-			title: 'Proposal Response',
-			name: 'Kemi',
-		};
+		const response = await fetch(
+			`https://formsubmit.co/ajax/${RECIPIENT_EMAIL}`,
+			{
+				method: 'POST',
+				headers: {
+					'Content-Type': 'application/json',
+					Accept: 'application/json',
+				},
+				body: JSON.stringify({
+					_subject: `💕 She said ${answer}! — Proposal Response`,
+					name: 'Aseye',
+					phone: '0509829682',
+					answer: answer,
+					message: `She said ${answer}! 🎉❤️ (Phone: 0509829682)`,
+					_captcha: 'false',
+					_template: 'table',
+				}),
+			},
+		);
 
-		await emailjs.send(SERVICE_ID, TEMPLATE_ID, templateParams, PUBLIC_KEY);
-		console.log('Email sent successfully!');
+		const data = await response.json();
+		if (data.success === 'true' || data.success === true) {
+			console.log('✅ Email sent successfully to', RECIPIENT_EMAIL);
+		} else {
+			console.warn('⚠️ Formsubmit response:', data);
+		}
 	} catch (error) {
-		console.error('Failed to send email:', error);
+		console.error('❌ Failed to send email:', error);
 	}
 };
 
 export const sendSixMonthNote = async (note: string) => {
 	try {
-		const templateParams = {
-			answer: note,
-			to_name: 'Gillette',
-			message: note,
-			title: 'A note back from Kemi (6 Months In)',
-			name: 'Kemi',
-		};
+		const response = await fetch(
+			`https://formsubmit.co/ajax/${RECIPIENT_EMAIL}`,
+			{
+				method: 'POST',
+				headers: {
+					'Content-Type': 'application/json',
+					Accept: 'application/json',
+				},
+				body: JSON.stringify({
+					_subject: `💌 A note from Aseye`,
+					name: 'Aseye',
+					phone: '0509829682',
+					message: note,
+					_captcha: 'false',
+					_template: 'table',
+				}),
+			},
+		);
 
-		await emailjs.send(SERVICE_ID, TEMPLATE_ID, templateParams, PUBLIC_KEY);
-		console.log('Note sent successfully!');
+		const data = await response.json();
+		return data.success === 'true' || data.success === true;
 	} catch (error) {
-		console.error('Failed to send note:', error);
+		console.error('❌ Failed to send note:', error);
+		return false;
 	}
 };
+

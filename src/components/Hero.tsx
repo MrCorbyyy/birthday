@@ -25,7 +25,7 @@ const Hero = () => {
 			ref={containerRef}
 			style={{ opacity }}
 			className="relative h-screen w-full flex flex-col items-center justify-center overflow-hidden bg-gradient-to-br from-rose-50 via-pink-50 to-rose-100">
-			{/* Enhanced Pulse Visualization */}
+			
 			<div className="absolute inset-0 flex items-center justify-center pointer-events-none">
 				{[...Array(4)].map((_, i) => (
 					<motion.div
@@ -48,7 +48,6 @@ const Hero = () => {
 					/>
 				))}
 
-				{/* Glowing Core */}
 				<motion.div
 					className="relative z-10 w-96 h-96 rounded-full blur-3xl opacity-40"
 					style={{
@@ -67,7 +66,6 @@ const Hero = () => {
 				/>
 			</div>
 
-			{/* Content Portal */}
 			<motion.div
 				style={{ scale, y }}
 				className="relative z-20 text-center space-y-12 max-w-4xl px-6">
@@ -76,7 +74,7 @@ const Hero = () => {
 					animate={{ opacity: 1, scale: 1 }}
 					transition={{ duration: 1.5, ease: 'easeOut' }}
 					className="space-y-8">
-					{/* Prominent Name Display */}
+
 					<motion.div
 						initial={{ opacity: 0, scale: 0.8 }}
 						animate={{ opacity: 1, scale: 1 }}
@@ -92,7 +90,7 @@ const Hero = () => {
 								],
 							}}
 							transition={{ duration: 3, repeat: Infinity }}>
-							Kemi
+							Aseye
 						</motion.h1>
 						<motion.div
 							initial={{ scaleX: 0 }}
