@@ -107,7 +107,7 @@ const Hero = () => {
 							initial={{ opacity: 0, y: 20 }}
 							animate={{ opacity: 1, y: 0 }}
 							transition={{ delay: 1.2, duration: 0.8 }}>
-							I've been thinking...
+							Looking back at all our memories...
 						</motion.p>
 
 						<motion.p
@@ -115,7 +115,7 @@ const Hero = () => {
 							animate={{ opacity: 1, y: 0 }}
 							transition={{ delay: 1.6, duration: 0.8 }}
 							className="text-gray-600 text-lg md:text-xl font-light max-w-2xl mx-auto leading-relaxed">
-							There's something I've wanted to ask you for a while now...
+							From our first text to late-night laughs, every moment with you led me here. This is something I've worked on to tell you much you mean to me...
 						</motion.p>
 					</div>
 				</motion.div>

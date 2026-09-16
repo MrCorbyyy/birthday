@@ -26,11 +26,12 @@ const LoveNoteJournal = () => {
 							<div className="absolute left-0 top-0 bottom-0 w-3 bg-black/10 rounded-l-sm" />
 							<BookHeart className="w-10 h-10 text-rose-100 mb-6 group-hover:scale-110 transition-transform" />
 							<h3 className="font-script text-4xl text-white mb-3">
-								Six Months In
+								Our Story
 							</h3>
 							<p className="text-rose-100 text-sm uppercase tracking-[0.3em]">
 								Open my journal
 							</p>
+
 						</motion.button>
 					) : (
 						<motion.div
@@ -50,49 +51,33 @@ const LoveNoteJournal = () => {
 								transition={{ delay: 0.5 }}
 								className="float-right ml-4 mb-4 w-28 md:w-36 bg-white p-2 pb-4 shadow-lg">
 								<img
-									src="/6-mnth-anniv/anniv_cover.JPG"
+									src="/6-mnth-anniv/us.jpeg"
 									alt="Us"
 									className="w-full aspect-square object-cover"
 								/>
 							</motion.div>
 
 							<span className="text-romantic-red text-xs font-bold tracking-[0.3em] uppercase opacity-60">
-								Dear Ursie
+								Dear Aseye
 							</span>
 
 							<div className="mt-6 font-display text-base md:text-lg leading-relaxed text-gray-800 space-y-4">
 								<p>
-									Six months ago I was standing behind a countdown, refreshing
-									it more than I'll admit, hoping you'd say yes. You did. And
-									the six months since have been better than anything I built up
-									in my head while I was waiting.
+									From our first pizza date and morning video calls, to grabbing ice cream and laughing through all our sweet, late-night randoms — every memory with you has been my absolute favorite part of us.
 								</p>
 								<p>
-									We've had a movie night through a laptop camera because a
-									screen was all we had that night. We've had real cinema seats,
-									too. We've lost — fine, <em>I've</em> lost, some of the time —
-									at bowling, won at laser tag, and gotten way too competitive
-									over an arcade hoop game that doesn't even keep real score. I
-									got on a flight just to stand in the same room as you.
+									You make ordinary moments feel like magic just by being in them.
 								</p>
-								{/* <p>
-									And somewhere in the middle of all of it, I got to watch you
-									in a hardhat, running a site like you were born doing it, and
-									think: <em>that's my girlfriend</em>. That's still wild to say
-									out loud.
-								</p> */}
-								<p>
-									181 days in, and I'd choose every single one again. Here's to
-									the next 181, and the 181 after that, and however many more
-									you'll have me for.
+								<p className="font-semibold text-romantic-red italic text-lg md:text-xl pt-2">
+									I've been thinking... There's something I've wanted to ask you for a while now...
 								</p>
 							</div>
 
-							<div className="mt-10 text-right clear-both">
+							<div className="mt-8 text-right clear-both">
 								<p className="font-romantic text-3xl text-romantic-red transform -rotate-2">
-									Still choosing you,
+									Forever yours,
 									<br />
-									<span className="text-4xl ml-4">Gillette</span>
+									<span className="text-4xl ml-4">Charddy</span>
 								</p>
 							</div>
 

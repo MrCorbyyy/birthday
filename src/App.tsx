@@ -4,6 +4,7 @@ import { motion } from 'framer-motion';
 import Hero from './components/Hero';
 import Gallery from './components/Gallery';
 import Message from './components/Message';
+import NoteBack from './components/six-months/NoteBack';
 import OpenWhen from './components/OpenWhen';
 import Birthday from './components/Birthday';
 import Proposal from './components/Proposal';
@@ -19,6 +20,7 @@ function App() {
 				'hero',
 				'gallery',
 				'message',
+				'noteback',
 				'openwhen',
 				'birthday',
 				'proposal',
@@ -75,6 +77,10 @@ function App() {
 
 					<div id="message">
 						<Message />
+					</div>
+
+					<div id="noteback">
+						<NoteBack />
 					</div>
 
 					<div id="openwhen">

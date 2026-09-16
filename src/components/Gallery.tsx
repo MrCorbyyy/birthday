@@ -32,7 +32,7 @@ const photos = [
 
 	{
 		src: '/6-mnth-anniv/ice cream.jpeg',
-		caption: 'Hangout Out',
+		caption: 'HangOut',
 		date: 'Recent',
 		color: '#c4b5fd',
 	},
