@@ -1,6 +1,6 @@
 import { useState, useRef } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Gift, Sparkles, Heart, X, Play } from 'lucide-react';
+import { Gift, Sparkles, Heart, X } from 'lucide-react';
 import confetti from 'canvas-confetti';
 
 const VideoReveal = () => {
