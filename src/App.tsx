@@ -3,6 +3,7 @@ import { Toaster } from 'react-hot-toast';
 import { motion } from 'framer-motion';
 import Hero from './components/Hero';
 import Gallery from './components/Gallery';
+import VideoReveal from './components/VideoReveal';
 import Message from './components/Message';
 import NoteBack from './components/six-months/NoteBack';
 import OpenWhen from './components/OpenWhen';
@@ -19,6 +20,7 @@ function App() {
 			const sections = [
 				'hero',
 				'gallery',
+				'surprise',
 				'message',
 				'noteback',
 				'openwhen',
@@ -73,6 +75,10 @@ function App() {
 
 					<div id="gallery">
 						<Gallery />
+					</div>
+
+					<div id="surprise">
+						<VideoReveal />
 					</div>
 
 					<div id="message">
